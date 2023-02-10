@@ -1,8 +1,9 @@
 import express, { Application } from 'express';
-import { db } from '../database/config';
 import cors from 'cors';
+
+import { db } from '../database/config';
 import { Paths } from '../interfaces/paths-interface';
-import { Usuarios, Todos } from '../routes';
+import { Usuarios, Todos, Auth } from '../routes';
 
 class Server {
 
@@ -30,7 +31,8 @@ class Server {
 
     routes() {
         this.app.use(this.path.usuarios, Usuarios);
-        this.app.use(this.path.todos, Todos);        
+        this.app.use(this.path.todos, Todos);
+        this.app.use(this.path.auth, Auth);        
     }
 
     middlewares() {
