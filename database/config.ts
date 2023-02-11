@@ -1,7 +1,8 @@
 import { Sequelize } from 'sequelize';
+import config from '../config';
 
-const user = process.env.DB_USERNAME;
-const password = process.env.DB_PASSWORD;
+const user = config.DB_USERNAME;
+const password = config.DB_PASSWORD;
 
 export const db = new Sequelize('test', user, password, {
     host: 'localhost',
