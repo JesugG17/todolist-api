@@ -11,9 +11,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.logIn = void 0;
 const logIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.json({
-        msg: 'Log in'
-    });
+    const { correo, password } = req.body;
+    console.log('Hola moundo');
+    try {
+    }
+    catch (error) {
+    }
+    res.json({ msg: 'log in' });
 });
 exports.logIn = logIn;
 //# sourceMappingURL=auth.controller.js.map

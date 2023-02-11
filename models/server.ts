@@ -16,13 +16,15 @@ class Server {
         this.path = {
             usuarios: '/api/usuarios',
             todos: '/api/todos',
-            auth: '/api/todos'
+            auth: '/api/auth'
         };
         this.port = 8080;
 
         this.conectarDB();
 
         this.middlewares();
+
+        this.routes();
     }
 
     async conectarDB() {
