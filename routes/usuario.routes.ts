@@ -12,10 +12,10 @@ router.get('/', obtenerUsuarios);
 
 router.get('/:id', obtenerUsuario);
 
-router.get('/', crearUsuario);
+router.post('/', crearUsuario);
 
-router.get('/:id', modificarUsuario);
+router.put('/:id', modificarUsuario);
 
-router.get('/:id', eliminarUsuario);
+router.delete('/:id', eliminarUsuario);
 
 export default router;

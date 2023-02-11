@@ -6,10 +6,10 @@ router.get('/', );
 
 router.get('/:id', );
 
-router.get('/', );
+router.post('/', );
 
-router.get('/:id', );
+router.put('/:id', );
 
-router.get('/:id', );
+router.delete('/:id', );
 
 export default router;
