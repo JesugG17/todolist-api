@@ -1,12 +1,13 @@
 import { DataTypes } from 'sequelize';
 
 import { Usuario } from './Usuario.model';
-import { db } from '../database/config';
+import { db } from '../database/config.database';
 
 const Todo = db.define('Todo', {
 
     todoId: {
-        type: DataTypes.STRING
+        type: DataTypes.STRING,
+        primaryKey: true
     },
 
     description: {
@@ -30,4 +31,9 @@ const Todo = db.define('Todo', {
 });
 
 
+
+const initTodo = async() => {
+    await Todo.sync();
+}
+initTodo();
 Usuario.hasMany(Todo);

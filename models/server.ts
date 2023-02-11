@@ -1,7 +1,7 @@
 import express, { Application } from 'express';
 import cors from 'cors';
 
-import { db } from '../database/config';
+import { db } from '../database/config.database';
 import { Paths } from '../interfaces/paths-interface';
 import { Usuarios, Todos, Auth } from '../routes';
 

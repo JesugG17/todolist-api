@@ -8,8 +8,13 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.eliminarUsuario = exports.modificarUsuario = exports.crearUsuario = exports.obtenerUsuario = exports.obtenerUsuarios = void 0;
+const Usuario_model_1 = require("../models/Usuario.model");
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const obtenerUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.json({
         msg: 'obtenerUsuario'
@@ -23,9 +28,17 @@ const obtenerUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function*
 });
 exports.obtenerUsuario = obtenerUsuario;
 const crearUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.json({
-        msg: 'crearUsuario'
-    });
+    const { nombre, correo, password } = req.body;
+    const salt = bcrypt_1.default.genSaltSync();
+    const newPassword = bcrypt_1.default.hashSync(password, salt);
+    const dataUsuario = {
+        nombre,
+        correo,
+        pass: newPassword,
+        vig: true
+    };
+    const usuario = yield Usuario_model_1.Usuario.create(dataUsuario);
+    res.json(usuario);
 });
 exports.crearUsuario = crearUsuario;
 const modificarUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

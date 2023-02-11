@@ -14,7 +14,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
-const config_1 = require("../database/config");
+const config_database_1 = require("../database/config.database");
 const routes_1 = require("../routes");
 class Server {
     constructor() {
@@ -31,7 +31,7 @@ class Server {
     }
     conectarDB() {
         return __awaiter(this, void 0, void 0, function* () {
-            yield config_1.db.authenticate();
+            yield config_database_1.db.authenticate();
         });
     }
     routes() {

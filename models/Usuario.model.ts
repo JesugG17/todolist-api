@@ -1,9 +1,11 @@
 import { DataTypes } from 'sequelize';
-import { db } from '../database/config';
+import { db } from '../database/config.database';
 
 export const Usuario = db.define('Usuario', {
     usuarioid: {
-        type: DataTypes.INTEGER
+        type: DataTypes.INTEGER,
+        primaryKey: true,
+        autoIncrement: true
     },
     nombre: {
         type: DataTypes.STRING
@@ -20,3 +22,9 @@ export const Usuario = db.define('Usuario', {
 }, {
     timestamps: false
 });
+
+const initUsuario = async() => {
+    await Usuario.sync();
+}
+
+initUsuario();
