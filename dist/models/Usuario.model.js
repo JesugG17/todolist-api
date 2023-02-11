@@ -4,7 +4,7 @@ exports.Usuario = void 0;
 const sequelize_1 = require("sequelize");
 const config_1 = require("../database/config");
 exports.Usuario = config_1.db.define('Usuario', {
-    id: {
+    usuarioid: {
         type: sequelize_1.DataTypes.INTEGER
     },
     nombre: {
@@ -19,5 +19,7 @@ exports.Usuario = config_1.db.define('Usuario', {
     vig: {
         type: sequelize_1.DataTypes.BOOLEAN
     }
+}, {
+    timestamps: false
 });
 //# sourceMappingURL=Usuario.model.js.map

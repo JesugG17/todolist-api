@@ -13,13 +13,17 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const express_1 = __importDefault(require("express"));
-const config_1 = require("../database/config");
 const cors_1 = __importDefault(require("cors"));
-const usuario_routes_1 = __importDefault(require("../routes/usuario.routes"));
+const config_1 = require("../database/config");
+const routes_1 = require("../routes");
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
-        this.path = '/api/users';
+        this.path = {
+            usuarios: '/api/usuarios',
+            todos: '/api/todos',
+            auth: '/api/todos'
+        };
         this.port = 8080;
         this.conectarDB();
         this.middlewares();
@@ -30,7 +34,9 @@ class Server {
         });
     }
     routes() {
-        this.app.use(this.path, usuario_routes_1.default);
+        this.app.use(this.path.usuarios, routes_1.Usuarios);
+        this.app.use(this.path.todos, routes_1.Todos);
+        this.app.use(this.path.auth, routes_1.Auth);
     }
     middlewares() {
         this.app.use(express_1.default.json());

@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize';
 import { db } from '../database/config';
 
 export const Usuario = db.define('Usuario', {
-    id: {
+    usuarioid: {
         type: DataTypes.INTEGER
     },
     nombre: {
@@ -17,4 +17,6 @@ export const Usuario = db.define('Usuario', {
     vig: {
         type: DataTypes.BOOLEAN
     }
+}, {
+    timestamps: false
 });
