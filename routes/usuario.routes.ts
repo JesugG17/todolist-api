@@ -1,4 +1,7 @@
 import { Router } from 'express';
+
+import { validarJWT } from '../helpers/validarJWT';
+
 import { obtenerUsuarios,
          obtenerUsuario,
          crearUsuario,
@@ -8,7 +11,9 @@ import { obtenerUsuarios,
 
 const router = Router();
 
-router.get('/', obtenerUsuarios);
+router.get('/',[
+    validarJWT
+],obtenerUsuarios);
 
 router.get('/:id', obtenerUsuario);
 

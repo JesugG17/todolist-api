@@ -38,6 +38,7 @@ export const logIn = async(req: Request, res: Response) => {
             });
         }
 
+
         const token = await generarJWT( usuario.usuarioid );
 
         res.json({
@@ -46,7 +47,9 @@ export const logIn = async(req: Request, res: Response) => {
         });
 
     } catch (error) {
-        
+        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+            error
+        })
     }
 
 }

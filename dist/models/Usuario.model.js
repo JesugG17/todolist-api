@@ -12,8 +12,6 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.Usuario = void 0;
 const sequelize_1 = require("sequelize");
 const config_database_1 = require("../database/config.database");
-class UsuarioModel extends sequelize_1.Model {
-}
 exports.Usuario = config_database_1.db.define('Usuario', {
     usuarioid: {
         type: sequelize_1.DataTypes.INTEGER,

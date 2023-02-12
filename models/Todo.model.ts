@@ -2,13 +2,9 @@ import { DataTypes, Model } from 'sequelize';
 
 import { Usuario } from './Usuario.model';
 import { db } from '../database/config.database';
+import { TodoModel } from '../interfaces/todo-model';
 
-class TodoModel extends Model {
-    declare todoId: number
-    declare description: string
-    declare estatus: boolean
-    declare usuarioid: number
-}
+
 
 const Todo = db.define<TodoModel>('Todo', {
 
