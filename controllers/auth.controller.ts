@@ -1,8 +1,5 @@
 import { Request, Response } from "express";
-import { UsuarioType } from '../interfaces/usuario-interface';
-
 import bcrypt from 'bcrypt';
-
 import { StatusCodes } from 'http-status-codes';
 
 import { Usuario } from '../models/Usuario.model';
@@ -29,15 +26,24 @@ export const logIn = async(req: Request, res: Response) => {
         if (!usuario.vig) {
             return res.status(StatusCodes.NOT_FOUND).json({
                 msg: `El usuario con el correo ${ correo } no existe`
-            })
+            });
         }
 
-        const token = await generarJWT()
 
+        const isValidPassword = bcrypt.compareSync(password, usuario.pass);
 
+        if (!isValidPassword) {
+            return res.status(StatusCodes.BAD_REQUEST).json({
+                msg: 'La contraseña no es correcta'
+            });
+        }
 
+        const token = await generarJWT( usuario.usuarioid );
 
-        res.json(usuario);
+        res.json({
+            usuario,
+            token
+        });
 
     } catch (error) {
         

@@ -8,8 +8,12 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __importDefault = (this && this.__importDefault) || function (mod) {
+    return (mod && mod.__esModule) ? mod : { "default": mod };
+};
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.logIn = void 0;
+const bcrypt_1 = __importDefault(require("bcrypt"));
 const http_status_codes_1 = require("http-status-codes");
 const Usuario_model_1 = require("../models/Usuario.model");
 const generarJWT_1 = require("../helpers/generarJWT");
@@ -32,8 +36,17 @@ const logIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 msg: `El usuario con el correo ${correo} no existe`
             });
         }
-        const token = yield (0, generarJWT_1.generarJWT)();
-        res.json(usuario);
+        const isValidPassword = bcrypt_1.default.compareSync(password, usuario.pass);
+        if (!isValidPassword) {
+            return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({
+                msg: 'La contraseña no es correcta'
+            });
+        }
+        const token = yield (0, generarJWT_1.generarJWT)(usuario.usuarioid);
+        res.json({
+            usuario,
+            token
+        });
     }
     catch (error) {
     }
