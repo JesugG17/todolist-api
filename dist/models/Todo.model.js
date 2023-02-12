@@ -12,6 +12,8 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const sequelize_1 = require("sequelize");
 const Usuario_model_1 = require("./Usuario.model");
 const config_database_1 = require("../database/config.database");
+class TodoModel extends sequelize_1.Model {
+}
 const Todo = config_database_1.db.define('Todo', {
     todoId: {
         type: sequelize_1.DataTypes.STRING,
