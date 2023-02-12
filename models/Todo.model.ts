@@ -31,12 +31,12 @@ export const Todo = db.define<TodoModel>('Todo', {
     timestamps: false
 });
 
-
-
 const initTodo = async() => {
     await Todo.sync();
 
 }
+
 initTodo();
+
 Usuario.hasMany(Todo, { foreignKey: 'usuarioid', sourceKey: 'usuarioid'} );
 Todo.belongsTo(Usuario, {foreignKey: 'usuarioid', targetKey: 'usuarioid' });

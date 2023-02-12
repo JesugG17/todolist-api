@@ -4,9 +4,16 @@ import { Todo } from '../models/Todo.model';
 
 export const obtenerTodos = async(req: Request, res: Response) => {
 
-    res.json({
-        msg: 'obtenerTodos'
-    });
+    const usuarioid = req.usuario?.usuarioid;
+
+    const todos = await Todo.findAll({
+        where: {
+            usuarioid,
+            estatus: true
+        }
+    })
+
+    res.json({ todos });
 }
 
 export const obtenerTodo = async(req: Request, res: Response) => {
@@ -29,17 +36,28 @@ export const crearTodo = async(req: Request, res: Response) => {
     console.log( data );
     const todo = await Todo.create(data);
 
-    res.json( todo);
+    res.json({ todo });
 }
 
 export const actualizarTodo = async(req: Request, res: Response) => {
-    res.json({
-        msg: 'obtenerTodos'
-    });
+
+    const { id } = req.params;
+    const { description } = req.body;
+
+    const todo = await Todo.findByPk( id );
+
+    const newTodo = await todo?.update({ description });
+
+    res.json({ todo: newTodo });
+    
 }
 
 export const eliminarTodo = async(req: Request, res: Response) => {
-    res.json({
-        msg: 'obtenerTodos'
-    });
+    const { id } = req.params;
+
+    const todo = await Todo.findByPk( id );
+
+    await todo?.update({ estatus: false });
+
+    res.json({ todo });
 }

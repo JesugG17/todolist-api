@@ -8,7 +8,7 @@ export const generarJWT = ( id: number ) => {
         const payload = { id };
 
         jwt.sign( payload, config.SECRETKEY, {
-            expiresIn: '1d'
+            expiresIn: '4h'
         }, (err, token) => {
 
             if (err) {
