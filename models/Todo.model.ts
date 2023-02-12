@@ -4,11 +4,6 @@ import { Usuario } from './Usuario.model';
 import { db } from '../database/config.database';
 import { TodoModel } from '../interfaces/todo-model';
 
-
-// TODO: FIX THE PROBLEM WITH THE INVALID COLUMN NAME
-
-
-
 export const Todo = db.define<TodoModel>('Todo', {
 
     todoId: {
@@ -28,7 +23,7 @@ export const Todo = db.define<TodoModel>('Todo', {
         type: DataTypes.INTEGER,
         references: {
             model: Usuario,
-            key: 'id' 
+            key: 'usuarioid' 
         }
     }
 
@@ -40,7 +35,8 @@ export const Todo = db.define<TodoModel>('Todo', {
 
 const initTodo = async() => {
     await Todo.sync();
+
 }
 initTodo();
-Usuario.hasMany(Todo);
-Todo.belongsTo(Usuario);
+Usuario.hasMany(Todo, { foreignKey: 'usuarioid', sourceKey: 'usuarioid'} );
+Todo.belongsTo(Usuario, {foreignKey: 'usuarioid', targetKey: 'usuarioid' });

@@ -13,7 +13,6 @@ exports.Todo = void 0;
 const sequelize_1 = require("sequelize");
 const Usuario_model_1 = require("./Usuario.model");
 const config_database_1 = require("../database/config.database");
-// TODO: FIX THE PROBLEM WITH THE INVALID COLUMN NAME
 exports.Todo = config_database_1.db.define('Todo', {
     todoId: {
         type: sequelize_1.DataTypes.STRING,
@@ -29,7 +28,7 @@ exports.Todo = config_database_1.db.define('Todo', {
         type: sequelize_1.DataTypes.INTEGER,
         references: {
             model: Usuario_model_1.Usuario,
-            key: 'id'
+            key: 'usuarioid'
         }
     }
 }, {
@@ -39,6 +38,6 @@ const initTodo = () => __awaiter(void 0, void 0, void 0, function* () {
     yield exports.Todo.sync();
 });
 initTodo();
-Usuario_model_1.Usuario.hasMany(exports.Todo);
-exports.Todo.belongsTo(Usuario_model_1.Usuario);
+Usuario_model_1.Usuario.hasMany(exports.Todo, { foreignKey: 'usuarioid', sourceKey: 'usuarioid' });
+exports.Todo.belongsTo(Usuario_model_1.Usuario, { foreignKey: 'usuarioid', targetKey: 'usuarioid' });
 //# sourceMappingURL=Todo.model.js.map

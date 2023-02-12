@@ -1,6 +1,7 @@
 import { DataTypes } from 'sequelize';
 import { db } from '../database/config.database';
 import { UsuarioModel } from '../interfaces/usuario-model';
+import { Todo } from './Todo.model';
 
 export const Usuario = db.define<UsuarioModel>('Usuario', {
     usuarioid: {
@@ -29,3 +30,5 @@ const initUsuario = async() => {
 }
 
 initUsuario();
+
+// Todo.belongsTo(Usuario);

@@ -37,4 +37,5 @@ const initUsuario = () => __awaiter(void 0, void 0, void 0, function* () {
     yield exports.Usuario.sync();
 });
 initUsuario();
+// Todo.belongsTo(Usuario);
 //# sourceMappingURL=Usuario.model.js.map
