@@ -1,8 +1,6 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes } from 'sequelize';
 import { db } from '../database/config.database';
 import { UsuarioModel } from '../interfaces/usuario-model';
-
-
 
 export const Usuario = db.define<UsuarioModel>('Usuario', {
     usuarioid: {

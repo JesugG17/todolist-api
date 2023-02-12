@@ -1,12 +1,15 @@
-import { DataTypes, Model } from 'sequelize';
+import { DataTypes } from 'sequelize';
 
 import { Usuario } from './Usuario.model';
 import { db } from '../database/config.database';
 import { TodoModel } from '../interfaces/todo-model';
 
 
+// TODO: FIX THE PROBLEM WITH THE INVALID COLUMN NAME
 
-const Todo = db.define<TodoModel>('Todo', {
+
+
+export const Todo = db.define<TodoModel>('Todo', {
 
     todoId: {
         type: DataTypes.STRING,
@@ -40,3 +43,4 @@ const initTodo = async() => {
 }
 initTodo();
 Usuario.hasMany(Todo);
+Todo.belongsTo(Usuario);

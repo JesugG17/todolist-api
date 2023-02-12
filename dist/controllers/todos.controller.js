@@ -10,6 +10,8 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.eliminarTodo = exports.actualizarTodo = exports.crearTodo = exports.obtenerTodo = exports.obtenerTodos = void 0;
+const uuidv4_1 = require("uuidv4");
+const Todo_model_1 = require("../models/Todo.model");
 const obtenerTodos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.json({
         msg: 'obtenerTodos'
@@ -23,10 +25,17 @@ const obtenerTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
 });
 exports.obtenerTodo = obtenerTodo;
 const crearTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _a;
     const { description } = req.body;
-    res.json({
-        msg: 'obtenerTodos'
-    });
+    const data = {
+        todoId: (0, uuidv4_1.uuid)(),
+        description,
+        estatus: true,
+        usuarioid: (_a = req.usuario) === null || _a === void 0 ? void 0 : _a.usuarioid
+    };
+    console.log(data);
+    const todo = yield Todo_model_1.Todo.create(data);
+    res.json(todo);
 });
 exports.crearTodo = crearTodo;
 const actualizarTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

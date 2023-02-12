@@ -1,13 +1,13 @@
 import { NextFunction, Request, Response } from "express";
 import jwt from 'jsonwebtoken';
 import { StatusCodes } from "http-status-codes";
+
 import config from '../config';
 import { Usuario } from "../models/Usuario.model";
 import { UsuarioID } from "../interfaces/usuarioid-interface";
-import { RequestExtended } from "../interfaces/request-extended";
 
 
-export const validarJWT = async(req: RequestExtended, res: Response, next: NextFunction) => {
+export const validarJWT = async(req: Request, res: Response, next: NextFunction) => {
 
     const { 'x-token': token } = req.headers;
 
