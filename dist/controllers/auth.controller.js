@@ -10,14 +10,33 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.logIn = void 0;
+const http_status_codes_1 = require("http-status-codes");
+const Usuario_model_1 = require("../models/Usuario.model");
+const generarJWT_1 = require("../helpers/generarJWT");
 const logIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { correo, password } = req.body;
     console.log('Hola moundo');
     try {
+        const usuario = yield Usuario_model_1.Usuario.findOne({
+            where: {
+                correo
+            }
+        });
+        if (!usuario) {
+            return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({
+                msg: `El correo ${correo} no existe`
+            });
+        }
+        if (!usuario.vig) {
+            return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({
+                msg: `El usuario con el correo ${correo} no existe`
+            });
+        }
+        const token = yield (0, generarJWT_1.generarJWT)();
+        res.json(usuario);
     }
     catch (error) {
     }
-    res.json({ msg: 'log in' });
 });
 exports.logIn = logIn;
 //# sourceMappingURL=auth.controller.js.map

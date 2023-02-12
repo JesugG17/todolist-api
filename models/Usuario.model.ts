@@ -1,7 +1,15 @@
-import { DataTypes } from 'sequelize';
+import { DataTypes, Model } from 'sequelize';
 import { db } from '../database/config.database';
 
-export const Usuario = db.define('Usuario', {
+class UsuarioModel extends Model {
+    declare usuarioid: number
+    declare nombre: string
+    declare correo: string
+    declare pass: string
+    declare vig: boolean
+}
+
+export const Usuario = db.define<UsuarioModel>('Usuario', {
     usuarioid: {
         type: DataTypes.INTEGER,
         primaryKey: true,
