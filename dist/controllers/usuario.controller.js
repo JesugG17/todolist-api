@@ -53,8 +53,9 @@ const crearUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 });
 exports.crearUsuario = crearUsuario;
 const modificarUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const id = req.params.id;
-    const _a = req.body, { password } = _a, cambios = __rest(_a, ["password"]);
+    var _a;
+    const id = (_a = req.usuario) === null || _a === void 0 ? void 0 : _a.usuarioid;
+    const _b = req.body, { password } = _b, cambios = __rest(_b, ["password"]);
     if (password) {
         const salt = bcrypt_1.default.genSaltSync();
         const hashedPassword = bcrypt_1.default.hashSync(password, salt);
@@ -66,9 +67,6 @@ const modificarUsuario = (req, res) => __awaiter(void 0, void 0, void 0, functio
 });
 exports.modificarUsuario = modificarUsuario;
 const eliminarUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.json({
-        msg: 'eliminarUsuario'
-    });
 });
 exports.eliminarUsuario = eliminarUsuario;
 //# sourceMappingURL=usuario.controller.js.map

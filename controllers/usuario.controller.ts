@@ -37,7 +37,7 @@ export const crearUsuario = async(req: Request, res: Response) => {
 export const modificarUsuario = async(req: Request, res: Response) => {
 
 
-    const id = req.params.id;
+    const id = req.usuario?.usuarioid;
     const { password, ...cambios } = req.body;
 
     if (password) {
@@ -55,8 +55,7 @@ export const modificarUsuario = async(req: Request, res: Response) => {
 }
 
 export const eliminarUsuario = async(req: Request, res: Response) => {
-    res.json({
-        msg: 'eliminarUsuario'
-    });
+    
+    
 }
 

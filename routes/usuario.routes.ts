@@ -25,7 +25,9 @@ router.post('/',[
     validarCampos
 ], crearUsuario);
 
-router.put('/:id', modificarUsuario);
+router.put('/:id',[
+    validarJWT
+], modificarUsuario);
 
 router.delete('/:id', eliminarUsuario);
 

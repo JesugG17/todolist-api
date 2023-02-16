@@ -15,7 +15,9 @@ router.post('/', [
     (0, express_validator_1.check)('correo').custom(validators_1.existeCorreo),
     validar_campos_1.validarCampos
 ], usuario_controller_1.crearUsuario);
-router.put('/:id', usuario_controller_1.modificarUsuario);
+router.put('/:id', [
+    validarJWT_1.validarJWT
+], usuario_controller_1.modificarUsuario);
 router.delete('/:id', usuario_controller_1.eliminarUsuario);
 exports.default = router;
 //# sourceMappingURL=usuario.routes.js.map
