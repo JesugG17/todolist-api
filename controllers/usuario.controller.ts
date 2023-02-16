@@ -36,22 +36,22 @@ export const crearUsuario = async(req: Request, res: Response) => {
 
 export const modificarUsuario = async(req: Request, res: Response) => {
 
-    const { nombre, password, correo } = req.body;
+
+    const id = req.params.id;
+    const { password, ...cambios } = req.body;
 
     if (password) {
         const salt = bcrypt.genSaltSync();
         const hashedPassword = bcrypt.hashSync(password, salt);
+        cambios.password = hashedPassword;
     }
 
-    const data = {
-        nombre,
-        
-    }
+    const usuario = await Usuario.findByPk( id );
 
+    await usuario?.update( cambios );
 
-    res.json({
-        msg: 'modificarUsuario'
-    });
+    res.json({ usuario });
+
 }
 
 export const eliminarUsuario = async(req: Request, res: Response) => {

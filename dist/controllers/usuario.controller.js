@@ -8,6 +8,17 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
+var __rest = (this && this.__rest) || function (s, e) {
+    var t = {};
+    for (var p in s) if (Object.prototype.hasOwnProperty.call(s, p) && e.indexOf(p) < 0)
+        t[p] = s[p];
+    if (s != null && typeof Object.getOwnPropertySymbols === "function")
+        for (var i = 0, p = Object.getOwnPropertySymbols(s); i < p.length; i++) {
+            if (e.indexOf(p[i]) < 0 && Object.prototype.propertyIsEnumerable.call(s, p[i]))
+                t[p[i]] = s[p[i]];
+        }
+    return t;
+};
 var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
@@ -42,17 +53,16 @@ const crearUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 });
 exports.crearUsuario = crearUsuario;
 const modificarUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const { nombre, password, correo } = req.body;
+    const id = req.params.id;
+    const _a = req.body, { password } = _a, cambios = __rest(_a, ["password"]);
     if (password) {
         const salt = bcrypt_1.default.genSaltSync();
         const hashedPassword = bcrypt_1.default.hashSync(password, salt);
+        cambios.password = hashedPassword;
     }
-    const data = {
-        nombre,
-    };
-    res.json({
-        msg: 'modificarUsuario'
-    });
+    const usuario = yield Usuario_model_1.Usuario.findByPk(id);
+    yield (usuario === null || usuario === void 0 ? void 0 : usuario.update(cambios));
+    res.json({ usuario });
 });
 exports.modificarUsuario = modificarUsuario;
 const eliminarUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
