@@ -1,6 +1,9 @@
 import { Router } from 'express';
 
-import { validarJWT } from '../helpers/validarJWT';
+import { validarJWT } from '../middlewares/validarJWT';
+import { check } from 'express-validator';
+import { existeCorreo } from '../helpers/validators';
+import { validarCampos } from '../middlewares/validar-campos';
 
 import { obtenerUsuarios,
          obtenerUsuario,
@@ -17,7 +20,10 @@ router.get('/',[
 
 router.get('/:id', obtenerUsuario);
 
-router.post('/', crearUsuario);
+router.post('/',[
+    check('correo').custom( existeCorreo ),
+    validarCampos
+], crearUsuario);
 
 router.put('/:id', modificarUsuario);
 

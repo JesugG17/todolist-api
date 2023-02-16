@@ -9,47 +9,25 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Usuario = void 0;
-const sequelize_1 = require("sequelize");
+exports.Role = void 0;
 const config_database_1 = require("../database/config.database");
-const Role_model_1 = require("./Role.model");
-exports.Usuario = config_database_1.db.define('Usuario', {
-    usuarioid: {
+const sequelize_1 = require("sequelize");
+exports.Role = config_database_1.db.define('Role', {
+    roleid: {
         type: sequelize_1.DataTypes.INTEGER,
         primaryKey: true,
         autoIncrement: true
     },
-    correo: {
+    roleName: {
         type: sequelize_1.DataTypes.STRING
-    },
-    password: {
-        type: sequelize_1.DataTypes.STRING
-    },
-    estatus: {
-        type: sequelize_1.DataTypes.BOOLEAN
-    },
-    roleid: {
-        type: sequelize_1.DataTypes.INTEGER,
-        references: {
-            model: Role_model_1.Role,
-            key: 'roleid'
-        },
-        defaultValue: 2
     }
-    // role: {
-    //     type: DataTypes.STRING,
-    //     references: {
-    //         model: Role,
-    //         key: 'role'
-    //     },
-    //     defaultValue: 'USER_ROLE'
-    // }
 }, {
     timestamps: false
 });
-const initUsuario = () => __awaiter(void 0, void 0, void 0, function* () {
-    yield exports.Usuario.sync();
+const initRoles = () => __awaiter(void 0, void 0, void 0, function* () {
+    yield exports.Role.sync();
 });
-initUsuario();
-// Usuario.belongsTo(Role, { foreignKey: 'role', targetKey: 'role' });
-//# sourceMappingURL=Usuario.model.js.map
+initRoles();
+// Role.hasMany(Usuario, { foreignKey: 'roleid', sourceKey: 'roleid'});
+// Usuario.belongsTo(Role, { foreignKey: 'roleid', targetKey: 'roleid'});
+//# sourceMappingURL=Role.model.js.map

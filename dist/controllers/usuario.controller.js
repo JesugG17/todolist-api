@@ -30,12 +30,12 @@ exports.obtenerUsuario = obtenerUsuario;
 const crearUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { nombre, correo, password } = req.body;
     const salt = bcrypt_1.default.genSaltSync();
-    const newPassword = bcrypt_1.default.hashSync(password, salt);
+    const hashedPassword = bcrypt_1.default.hashSync(password, salt);
     const dataUsuario = {
         nombre,
         correo,
-        pass: newPassword,
-        vig: true
+        password: hashedPassword,
+        estatus: true
     };
     const usuario = yield Usuario_model_1.Usuario.create(dataUsuario);
     res.json(usuario);

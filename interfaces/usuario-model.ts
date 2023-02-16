@@ -4,6 +4,6 @@ export interface UsuarioModel extends Model {
     usuarioid: number
     nombre: string
     correo: string
-    pass: string
-    vig: boolean
+    password: string
+    estatus: boolean
 }

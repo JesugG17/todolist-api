@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { Usuario } from '../models/Usuario.model';
 import bcrypt from 'bcrypt';
+import { UsuarioModel } from '../interfaces/usuario-model';
 
 
 export const obtenerUsuarios = async(req: Request, res: Response) => {
@@ -20,13 +21,13 @@ export const crearUsuario = async(req: Request, res: Response) => {
     const { nombre, correo, password } = req.body;
 
     const salt = bcrypt.genSaltSync();
-    const newPassword = bcrypt.hashSync(password, salt);
+    const hashedPassword = bcrypt.hashSync(password, salt);
 
     const dataUsuario = {
         nombre,
         correo,
-        pass: newPassword,
-        vig: true
+        password: hashedPassword,
+        estatus: true
     };
 
     const usuario = await Usuario.create( dataUsuario );

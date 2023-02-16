@@ -4,6 +4,7 @@ import cors from 'cors';
 import { db } from '../database/config.database';
 import { Paths } from '../interfaces/paths-interface';
 import { Usuarios, Todos, Auth } from '../routes';
+import Role from '../routes/role.routes';
 
 class Server {
 
@@ -34,7 +35,8 @@ class Server {
     routes() {
         this.app.use(this.path.usuarios, Usuarios);
         this.app.use(this.path.todos, Todos);
-        this.app.use(this.path.auth, Auth);        
+        this.app.use(this.path.auth, Auth);
+        this.app.use('/api/role', Role)       
     }
 
     middlewares() {

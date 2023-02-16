@@ -9,8 +9,9 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
     });
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.existeTodoId = void 0;
+exports.existeCorreo = exports.existeTodoId = void 0;
 const Todo_model_1 = require("../models/Todo.model");
+const Usuario_model_1 = require("../models/Usuario.model");
 const existeTodoId = (id) => __awaiter(void 0, void 0, void 0, function* () {
     const todo = yield Todo_model_1.Todo.findByPk(id);
     if (!todo) {
@@ -18,4 +19,15 @@ const existeTodoId = (id) => __awaiter(void 0, void 0, void 0, function* () {
     }
 });
 exports.existeTodoId = existeTodoId;
+const existeCorreo = (correo) => __awaiter(void 0, void 0, void 0, function* () {
+    const usuario = yield Usuario_model_1.Usuario.findOne({
+        where: {
+            correo
+        }
+    });
+    if (usuario) {
+        throw new Error(`El correo ${correo} ya esta registrado`);
+    }
+});
+exports.existeCorreo = existeCorreo;
 //# sourceMappingURL=validators.js.map

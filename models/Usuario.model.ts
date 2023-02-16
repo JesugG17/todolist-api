@@ -1,7 +1,7 @@
 import { DataTypes } from 'sequelize';
 import { db } from '../database/config.database';
 import { UsuarioModel } from '../interfaces/usuario-model';
-import { Todo } from './Todo.model';
+import { Role } from './Role.model';
 
 export const Usuario = db.define<UsuarioModel>('Usuario', {
     usuarioid: {
@@ -9,18 +9,31 @@ export const Usuario = db.define<UsuarioModel>('Usuario', {
         primaryKey: true,
         autoIncrement: true
     },
-    nombre: {
-        type: DataTypes.STRING
-    },
     correo: {
         type: DataTypes.STRING
     },
-    pass: {
+    password: {
         type: DataTypes.STRING
     },
-    vig: {
+    estatus: {
         type: DataTypes.BOOLEAN
+    },
+    roleid: {
+        type: DataTypes.INTEGER,
+        references: {
+            model: Role,
+            key: 'roleid'
+        },
+        defaultValue: 2
     }
+    // role: {
+    //     type: DataTypes.STRING,
+    //     references: {
+    //         model: Role,
+    //         key: 'role'
+    //     },
+    //     defaultValue: 'USER_ROLE'
+    // }
 }, {
     timestamps: false
 });
@@ -31,4 +44,4 @@ const initUsuario = async() => {
 
 initUsuario();
 
-// Todo.belongsTo(Usuario);
+// Usuario.belongsTo(Role, { foreignKey: 'role', targetKey: 'role' });

@@ -37,6 +37,6 @@ const initTodo = async() => {
 }
 
 initTodo();
-
+                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                         
 Usuario.hasMany(Todo, { foreignKey: 'usuarioid', sourceKey: 'usuarioid'} );
 Todo.belongsTo(Usuario, {foreignKey: 'usuarioid', targetKey: 'usuarioid' });
