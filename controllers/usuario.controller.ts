@@ -20,12 +20,6 @@ export const getUsers = async(req: Request, res: Response) => {
     });
 }
 
-export const obtenerUsuario = async(req: Request, res: Response) => {
-    res.json({
-        msg: 'obtenerUsuario'
-    });
-}
-
 export const createUsers = async(req: Request, res: Response) => {
 
     const { nombre, correo, password } = req.body;

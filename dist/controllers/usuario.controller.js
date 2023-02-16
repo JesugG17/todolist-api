@@ -23,7 +23,7 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.deleteUser = exports.updateUser = exports.createUsers = exports.obtenerUsuario = exports.getUsers = void 0;
+exports.deleteUser = exports.updateUser = exports.createUsers = exports.getUsers = void 0;
 const Usuario_model_1 = require("../models/Usuario.model");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
@@ -41,12 +41,6 @@ const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     });
 });
 exports.getUsers = getUsers;
-const obtenerUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.json({
-        msg: 'obtenerUsuario'
-    });
-});
-exports.obtenerUsuario = obtenerUsuario;
 const createUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { nombre, correo, password } = req.body;
     const salt = bcrypt_1.default.genSaltSync();
