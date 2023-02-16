@@ -18,12 +18,6 @@ export const obtenerTodos = async(req: Request, res: Response) => {
     res.json({ total, todos });
 }
 
-export const obtenerTodo = async(req: Request, res: Response) => {
-    res.json({
-        msg: 'obtenerTodos'
-    });
-}
-
 export const crearTodo = async(req: Request, res: Response) => {
 
     const { description } = req.body;
