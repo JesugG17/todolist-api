@@ -27,8 +27,15 @@ exports.eliminarUsuario = exports.modificarUsuario = exports.crearUsuario = expo
 const Usuario_model_1 = require("../models/Usuario.model");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const obtenerUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const usuarios = yield Usuario_model_1.Usuario.findAll({
+        where: {
+            estatus: true
+        }
+    });
+    const total = usuarios.length;
     res.json({
-        msg: 'obtenerUsuario'
+        total,
+        usuarios
     });
 });
 exports.obtenerUsuarios = obtenerUsuarios;

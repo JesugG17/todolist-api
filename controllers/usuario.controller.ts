@@ -4,8 +4,17 @@ import bcrypt from 'bcrypt';
 
 export const obtenerUsuarios = async(req: Request, res: Response) => {
     
+    const usuarios = await Usuario.findAll({
+        where: {
+            estatus: true
+        }
+    });
+
+    const total = usuarios.length
+
     res.json({
-        msg: 'obtenerUsuario'
+        total,
+        usuarios
     });
 }
 
