@@ -14,9 +14,7 @@ import { obtenerUsuarios,
 
 const router = Router();
 
-router.get('/',[
-    validarJWT
-],obtenerUsuarios);
+router.get('/', obtenerUsuarios);
 
 router.get('/:id', obtenerUsuario);
 
@@ -25,10 +23,12 @@ router.post('/',[
     validarCampos
 ], crearUsuario);
 
-router.put('/:id',[
+router.put('/',[
     validarJWT
 ], modificarUsuario);
 
-router.delete('/:id', eliminarUsuario);
+router.delete('/',[
+    validarJWT
+] ,eliminarUsuario);
 
 export default router;

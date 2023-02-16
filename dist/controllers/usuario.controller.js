@@ -67,6 +67,12 @@ const modificarUsuario = (req, res) => __awaiter(void 0, void 0, void 0, functio
 });
 exports.modificarUsuario = modificarUsuario;
 const eliminarUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    var _c;
+    const id = (_c = req.usuario) === null || _c === void 0 ? void 0 : _c.usuarioid;
+    const usuario = yield Usuario_model_1.Usuario.findByPk(id);
+    console.log(usuario);
+    yield (usuario === null || usuario === void 0 ? void 0 : usuario.update({ estatus: false }));
+    res.json({ usuario });
 });
 exports.eliminarUsuario = eliminarUsuario;
 //# sourceMappingURL=usuario.controller.js.map

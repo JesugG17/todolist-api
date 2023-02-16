@@ -56,6 +56,12 @@ export const modificarUsuario = async(req: Request, res: Response) => {
 
 export const eliminarUsuario = async(req: Request, res: Response) => {
     
+    const id = req.usuario?.usuarioid;
+
+    const usuario = await Usuario.findByPk( id );
+    console.log( usuario );
+    await usuario?.update({ estatus: false });
     
+    res.json({ usuario });
 }
 
