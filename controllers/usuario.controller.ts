@@ -4,16 +4,18 @@ import bcrypt from 'bcrypt';
 
 export const getUsers = async(req: Request, res: Response) => {
     
-    const usuarios = await Usuario.findAll({
+    const { limit = 100, offset = 0 } = req.query;
+
+    const { count, rows: usuarios } = await Usuario.findAndCountAll({
         where: {
             estatus: true
-        }
+        },
+        offset: Number(offset),
+        limit: Number(limit)
     });
 
-    const total = usuarios.length
-
     res.json({
-        total,
+        count,
         usuarios
     });
 }
@@ -45,7 +47,6 @@ export const createUsers = async(req: Request, res: Response) => {
 
 export const updateUser = async(req: Request, res: Response) => {
 
-
     const id = req.usuario?.usuarioid;
     const { password, ...cambios } = req.body;
 
@@ -73,4 +74,3 @@ export const deleteUser = async(req: Request, res: Response) => {
     
     res.json({ usuario });
 }
-

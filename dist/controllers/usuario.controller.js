@@ -27,14 +27,16 @@ exports.deleteUser = exports.updateUser = exports.createUsers = exports.obtenerU
 const Usuario_model_1 = require("../models/Usuario.model");
 const bcrypt_1 = __importDefault(require("bcrypt"));
 const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    const usuarios = yield Usuario_model_1.Usuario.findAll({
+    const { limit = 100, offset = 0 } = req.query;
+    const { count, rows: usuarios } = yield Usuario_model_1.Usuario.findAndCountAll({
         where: {
             estatus: true
-        }
+        },
+        offset: Number(offset),
+        limit: Number(limit)
     });
-    const total = usuarios.length;
     res.json({
-        total,
+        count,
         usuarios
     });
 });

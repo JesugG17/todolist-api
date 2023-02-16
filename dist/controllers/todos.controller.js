@@ -14,16 +14,17 @@ const uuidv4_1 = require("uuidv4");
 const Todo_model_1 = require("../models/Todo.model");
 const obtenerTodos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
+    const { offset = 0, limit = 100 } = req.query;
     const usuarioid = (_a = req.usuario) === null || _a === void 0 ? void 0 : _a.usuarioid;
-    console.log(usuarioid);
-    const todos = yield Todo_model_1.Todo.findAll({
+    const { count, rows: todos } = yield Todo_model_1.Todo.findAndCountAll({
         where: {
-            usuarioid,
-            estatus: true
-        }
+            estatus: true,
+            usuarioid
+        },
+        offset: Number(offset),
+        limit: Number(limit)
     });
-    const total = todos.length;
-    res.json({ total, todos });
+    res.json({ count, todos });
 });
 exports.obtenerTodos = obtenerTodos;
 const crearTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {

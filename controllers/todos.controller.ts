@@ -4,18 +4,20 @@ import { Todo } from '../models/Todo.model';
 
 export const obtenerTodos = async(req: Request, res: Response) => {
 
+
+    const { offset = 0, limit = 100 } = req.query;
     const usuarioid = req.usuario?.usuarioid;
-    console.log( usuarioid );
-    const todos = await Todo.findAll({
+
+    const { count, rows: todos } = await Todo.findAndCountAll({
         where: {
-            usuarioid,
-            estatus: true
-        }
+            estatus: true,
+            usuarioid
+        },
+        offset: Number(offset),
+        limit: Number(limit)
     });
 
-    const total = todos.length;
-
-    res.json({ total, todos });
+    res.json({ count, todos });
 }
 
 export const crearTodo = async(req: Request, res: Response) => {
