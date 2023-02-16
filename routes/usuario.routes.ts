@@ -6,7 +6,6 @@ import { existeCorreo } from '../helpers/validators';
 import { validarCampos } from '../middlewares/validar-campos';
 
 import { getUsers,
-         obtenerUsuario,
          createUsers,
          updateUser,
          deleteUser } from '../controllers/usuario.controller';
@@ -15,8 +14,6 @@ import { getUsers,
 const router = Router();
 
 router.get('/', getUsers);
-
-router.get('/:id', obtenerUsuario);
 
 router.post('/',[
     check('correo').custom( existeCorreo ),

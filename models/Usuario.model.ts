@@ -1,6 +1,6 @@
 import { DataTypes } from 'sequelize';
 import { db } from '../database/config.database';
-import { UsuarioModel } from '../interfaces/usuario-model';
+import { UsuarioModel } from '../interfaces/usuario-interface';
 import { Role } from './Role.model';
 
 export const Usuario = db.define<UsuarioModel>('Usuario', {

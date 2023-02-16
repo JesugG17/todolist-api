@@ -1,4 +1,4 @@
-import { UsuarioModel } from './interfaces/usuario-model';
+import { UsuarioModel } from './interfaces/usuario-interface';
 namespace NodeJS {
     interface ProcessEnv {
       SECRETKEY: string;
