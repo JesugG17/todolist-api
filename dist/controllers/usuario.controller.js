@@ -23,10 +23,10 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
     return (mod && mod.__esModule) ? mod : { "default": mod };
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.eliminarUsuario = exports.modificarUsuario = exports.crearUsuario = exports.obtenerUsuario = exports.obtenerUsuarios = void 0;
+exports.deleteUser = exports.updateUser = exports.createUsers = exports.obtenerUsuario = exports.getUsers = void 0;
 const Usuario_model_1 = require("../models/Usuario.model");
 const bcrypt_1 = __importDefault(require("bcrypt"));
-const obtenerUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const usuarios = yield Usuario_model_1.Usuario.findAll({
         where: {
             estatus: true
@@ -38,14 +38,14 @@ const obtenerUsuarios = (req, res) => __awaiter(void 0, void 0, void 0, function
         usuarios
     });
 });
-exports.obtenerUsuarios = obtenerUsuarios;
+exports.getUsers = getUsers;
 const obtenerUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     res.json({
         msg: 'obtenerUsuario'
     });
 });
 exports.obtenerUsuario = obtenerUsuario;
-const crearUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+const createUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { nombre, correo, password } = req.body;
     const salt = bcrypt_1.default.genSaltSync();
     const hashedPassword = bcrypt_1.default.hashSync(password, salt);
@@ -58,8 +58,8 @@ const crearUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* (
     const usuario = yield Usuario_model_1.Usuario.create(dataUsuario);
     res.json(usuario);
 });
-exports.crearUsuario = crearUsuario;
-const modificarUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.createUsers = createUsers;
+const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const id = (_a = req.usuario) === null || _a === void 0 ? void 0 : _a.usuarioid;
     const _b = req.body, { password } = _b, cambios = __rest(_b, ["password"]);
@@ -72,8 +72,8 @@ const modificarUsuario = (req, res) => __awaiter(void 0, void 0, void 0, functio
     yield (usuario === null || usuario === void 0 ? void 0 : usuario.update(cambios));
     res.json({ usuario });
 });
-exports.modificarUsuario = modificarUsuario;
-const eliminarUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+exports.updateUser = updateUser;
+const deleteUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _c;
     const id = (_c = req.usuario) === null || _c === void 0 ? void 0 : _c.usuarioid;
     const usuario = yield Usuario_model_1.Usuario.findByPk(id);
@@ -81,5 +81,5 @@ const eliminarUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function
     yield (usuario === null || usuario === void 0 ? void 0 : usuario.update({ estatus: false }));
     res.json({ usuario });
 });
-exports.eliminarUsuario = eliminarUsuario;
+exports.deleteUser = deleteUser;
 //# sourceMappingURL=usuario.controller.js.map

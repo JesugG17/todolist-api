@@ -2,7 +2,7 @@ import { Request, Response } from 'express';
 import { Usuario } from '../models/Usuario.model';
 import bcrypt from 'bcrypt';
 
-export const obtenerUsuarios = async(req: Request, res: Response) => {
+export const getUsers = async(req: Request, res: Response) => {
     
     const usuarios = await Usuario.findAll({
         where: {
@@ -24,7 +24,7 @@ export const obtenerUsuario = async(req: Request, res: Response) => {
     });
 }
 
-export const crearUsuario = async(req: Request, res: Response) => {
+export const createUsers = async(req: Request, res: Response) => {
 
     const { nombre, correo, password } = req.body;
 
@@ -43,7 +43,7 @@ export const crearUsuario = async(req: Request, res: Response) => {
     res.json( usuario );
 }
 
-export const modificarUsuario = async(req: Request, res: Response) => {
+export const updateUser = async(req: Request, res: Response) => {
 
 
     const id = req.usuario?.usuarioid;
@@ -63,7 +63,7 @@ export const modificarUsuario = async(req: Request, res: Response) => {
 
 }
 
-export const eliminarUsuario = async(req: Request, res: Response) => {
+export const deleteUser = async(req: Request, res: Response) => {
     
     const id = req.usuario?.usuarioid;
 

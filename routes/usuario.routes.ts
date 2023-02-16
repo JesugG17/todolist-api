@@ -5,30 +5,30 @@ import { check } from 'express-validator';
 import { existeCorreo } from '../helpers/validators';
 import { validarCampos } from '../middlewares/validar-campos';
 
-import { obtenerUsuarios,
+import { getUsers,
          obtenerUsuario,
-         crearUsuario,
-         modificarUsuario,
-         eliminarUsuario } from '../controllers/usuario.controller';
+         createUsers,
+         updateUser,
+         deleteUser } from '../controllers/usuario.controller';
 
 
 const router = Router();
 
-router.get('/', obtenerUsuarios);
+router.get('/', getUsers);
 
 router.get('/:id', obtenerUsuario);
 
 router.post('/',[
     check('correo').custom( existeCorreo ),
     validarCampos
-], crearUsuario);
+], createUsers);
 
 router.put('/',[
     validarJWT
-], modificarUsuario);
+], updateUser);
 
 router.delete('/',[
     validarJWT
-] ,eliminarUsuario);
+] ,deleteUser);
 
 export default router;
