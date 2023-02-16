@@ -29,7 +29,7 @@ export const validarJWT = async(req: Request, res: Response, next: NextFunction)
             });
         }
 
-        if (!usuario.vig) {
+        if (!usuario.estatus) {
             return res.status(StatusCodes.NOT_FOUND).json({
                 msg: 'Este usuario no existe'
             })

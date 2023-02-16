@@ -19,7 +19,6 @@ const Usuario_model_1 = require("../models/Usuario.model");
 const generarJWT_1 = require("../helpers/generarJWT");
 const logIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { correo, password } = req.body;
-    console.log('Hola moundo');
     try {
         const usuario = yield Usuario_model_1.Usuario.findOne({
             where: {
@@ -31,12 +30,12 @@ const logIn = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
                 msg: `El correo ${correo} no existe`
             });
         }
-        if (!usuario.vig) {
+        if (!usuario.estatus) {
             return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({
                 msg: `El usuario con el correo ${correo} no existe`
             });
         }
-        const isValidPassword = bcrypt_1.default.compareSync(password, usuario.pass);
+        const isValidPassword = bcrypt_1.default.compareSync(password, usuario.password);
         if (!isValidPassword) {
             return res.status(http_status_codes_1.StatusCodes.BAD_REQUEST).json({
                 msg: 'La contraseña no es correcta'

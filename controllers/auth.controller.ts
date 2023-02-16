@@ -8,7 +8,7 @@ import { generarJWT } from "../helpers/generarJWT";
 export const logIn = async(req: Request, res: Response) => {
 
     const { correo, password } = req.body;
-    console.log('Hola moundo');
+    
     try {
         
         const usuario = await Usuario.findOne({
@@ -23,21 +23,19 @@ export const logIn = async(req: Request, res: Response) => {
             });
         }
 
-        if (!usuario.vig) {
+        if (!usuario.estatus) {
             return res.status(StatusCodes.NOT_FOUND).json({
                 msg: `El usuario con el correo ${ correo } no existe`
             });
         }
 
-
-        const isValidPassword = bcrypt.compareSync(password, usuario.pass);
+        const isValidPassword = bcrypt.compareSync(password, usuario.password);
 
         if (!isValidPassword) {
             return res.status(StatusCodes.BAD_REQUEST).json({
                 msg: 'La contraseña no es correcta'
             });
         }
-
 
         const token = await generarJWT( usuario.usuarioid );
 

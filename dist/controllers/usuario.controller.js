@@ -42,6 +42,14 @@ const crearUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* (
 });
 exports.crearUsuario = crearUsuario;
 const modificarUsuario = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const { nombre, password, correo } = req.body;
+    if (password) {
+        const salt = bcrypt_1.default.genSaltSync();
+        const hashedPassword = bcrypt_1.default.hashSync(password, salt);
+    }
+    const data = {
+        nombre,
+    };
     res.json({
         msg: 'modificarUsuario'
     });

@@ -32,7 +32,7 @@ const validarJWT = (req, res, next) => __awaiter(void 0, void 0, void 0, functio
                 msg: 'Usuario no encontrado'
             });
         }
-        if (!usuario.vig) {
+        if (!usuario.estatus) {
             return res.status(http_status_codes_1.StatusCodes.NOT_FOUND).json({
                 msg: 'Este usuario no existe'
             });

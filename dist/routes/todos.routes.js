@@ -10,7 +10,6 @@ const router = (0, express_1.Router)();
 router.get('/', [
     validarJWT_1.validarJWT
 ], todos_controller_1.obtenerTodos);
-router.get('/:id', todos_controller_1.obtenerTodo);
 router.post('/', [
     validarJWT_1.validarJWT,
     (0, express_validator_1.check)('description', 'la descripcion de la tarea es obligatoria').not().isEmpty(),

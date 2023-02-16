@@ -5,7 +5,6 @@ import { validarJWT } from '../middlewares/validarJWT';
 import { validarCampos } from '../middlewares/validar-campos';
 import { crearTodo, 
          obtenerTodos, 
-         obtenerTodo, 
          actualizarTodo, 
          eliminarTodo } from '../controllers/todos.controller';
 import { existeTodoId } from '../helpers/validators';
@@ -15,8 +14,6 @@ const router = Router();
 router.get('/',[
    validarJWT
 ], obtenerTodos);
-
-router.get('/:id', obtenerTodo);
 
 router.post('/',[
    validarJWT,

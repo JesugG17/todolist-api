@@ -1,10 +1,9 @@
 import { Request, Response } from 'express';
 import { Usuario } from '../models/Usuario.model';
 import bcrypt from 'bcrypt';
-import { UsuarioModel } from '../interfaces/usuario-model';
-
 
 export const obtenerUsuarios = async(req: Request, res: Response) => {
+    
     res.json({
         msg: 'obtenerUsuario'
     });
@@ -36,6 +35,20 @@ export const crearUsuario = async(req: Request, res: Response) => {
 }
 
 export const modificarUsuario = async(req: Request, res: Response) => {
+
+    const { nombre, password, correo } = req.body;
+
+    if (password) {
+        const salt = bcrypt.genSaltSync();
+        const hashedPassword = bcrypt.hashSync(password, salt);
+    }
+
+    const data = {
+        nombre,
+        
+    }
+
+
     res.json({
         msg: 'modificarUsuario'
     });

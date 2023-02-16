@@ -5,15 +5,17 @@ import { Todo } from '../models/Todo.model';
 export const obtenerTodos = async(req: Request, res: Response) => {
 
     const usuarioid = req.usuario?.usuarioid;
-
+    console.log( usuarioid );
     const todos = await Todo.findAll({
         where: {
             usuarioid,
             estatus: true
         }
-    })
+    });
 
-    res.json({ todos });
+    const total = todos.length;
+
+    res.json({ total, todos });
 }
 
 export const obtenerTodo = async(req: Request, res: Response) => {

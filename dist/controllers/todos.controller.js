@@ -15,13 +15,15 @@ const Todo_model_1 = require("../models/Todo.model");
 const obtenerTodos = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     var _a;
     const usuarioid = (_a = req.usuario) === null || _a === void 0 ? void 0 : _a.usuarioid;
+    console.log(usuarioid);
     const todos = yield Todo_model_1.Todo.findAll({
         where: {
             usuarioid,
             estatus: true
         }
     });
-    res.json({ todos });
+    const total = todos.length;
+    res.json({ total, todos });
 });
 exports.obtenerTodos = obtenerTodos;
 const obtenerTodo = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
