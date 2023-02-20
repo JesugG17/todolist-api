@@ -9,6 +9,7 @@ const usuario_controller_1 = require("../controllers/usuario.controller");
 const router = (0, express_1.Router)();
 router.get('/', usuario_controller_1.getUsers);
 router.post('/', [
+    (0, express_validator_1.check)('correo', 'El correo es obligatorio').not().isEmpty(),
     (0, express_validator_1.check)('correo').custom(validators_1.existeCorreo),
     validar_campos_1.validateInputs
 ], usuario_controller_1.createUsers);

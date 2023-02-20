@@ -16,6 +16,7 @@ const router = Router();
 router.get('/', getUsers);
 
 router.post('/',[
+    check('correo', 'El correo es obligatorio').not().isEmpty(),
     check('correo').custom( existeCorreo ),
     validateInputs
 ], createUsers);
