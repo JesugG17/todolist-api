@@ -16,14 +16,13 @@ const express_1 = __importDefault(require("express"));
 const cors_1 = __importDefault(require("cors"));
 const config_database_1 = require("../database/config.database");
 const routes_1 = require("../routes");
-const role_routes_1 = __importDefault(require("../routes/role.routes"));
 class Server {
     constructor() {
         this.app = (0, express_1.default)();
         this.path = {
-            usuarios: '/api/usuarios',
-            todos: '/api/todos',
-            auth: '/api/auth'
+            usuarios: 'v1/api/usuarios',
+            todos: 'v1/api/todos',
+            auth: 'v1/api/auth'
         };
         this.port = 8080;
         this.conectarDB();
@@ -39,7 +38,6 @@ class Server {
         this.app.use(this.path.usuarios, routes_1.Usuarios);
         this.app.use(this.path.todos, routes_1.Todos);
         this.app.use(this.path.auth, routes_1.Auth);
-        this.app.use('/api/role', role_routes_1.default);
     }
     middlewares() {
         this.app.use(express_1.default.json());
