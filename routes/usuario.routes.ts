@@ -3,7 +3,7 @@ import { Router } from 'express';
 import { validarJWT } from '../middlewares/validarJWT';
 import { check } from 'express-validator';
 import { existeCorreo } from '../helpers/validators';
-import { validarCampos } from '../middlewares/validar-campos';
+import { validateInputs } from '../middlewares/validar-campos';
 
 import { getUsers,
          createUsers,
@@ -17,7 +17,7 @@ router.get('/', getUsers);
 
 router.post('/',[
     check('correo').custom( existeCorreo ),
-    validarCampos
+    validateInputs
 ], createUsers);
 
 router.put('/',[

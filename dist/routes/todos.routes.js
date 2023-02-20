@@ -13,18 +13,18 @@ router.get('/', [
 router.post('/', [
     validarJWT_1.validarJWT,
     (0, express_validator_1.check)('description', 'la descripcion de la tarea es obligatoria').not().isEmpty(),
-    validar_campos_1.validarCampos
+    validar_campos_1.validateInputs
 ], todos_controller_1.crearTodo);
 router.put('/:id', [
     validarJWT_1.validarJWT,
     (0, express_validator_1.check)('id').custom(validators_1.existeTodoId),
     (0, express_validator_1.check)('description', 'la descripcion es obligatoria').not().isEmpty(),
-    validar_campos_1.validarCampos
+    validar_campos_1.validateInputs
 ], todos_controller_1.actualizarTodo);
 router.delete('/:id', [
     validarJWT_1.validarJWT,
     (0, express_validator_1.check)('id').custom(validators_1.existeTodoId),
-    validar_campos_1.validarCampos
+    validar_campos_1.validateInputs
 ], todos_controller_1.eliminarTodo);
 exports.default = router;
 //# sourceMappingURL=todos.routes.js.map

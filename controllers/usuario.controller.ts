@@ -1,6 +1,7 @@
 import { Request, Response } from 'express';
 import { Usuario } from '../models/Usuario.model';
 import bcrypt from 'bcrypt';
+import { StatusCodes } from 'http-status-codes';
 
 export const getUsers = async(req: Request, res: Response) => {
     
@@ -36,7 +37,7 @@ export const createUsers = async(req: Request, res: Response) => {
 
     const usuario = await Usuario.create( dataUsuario );
 
-    res.json( usuario );
+    res.status(StatusCodes.CREATED).json( usuario );
 }
 
 export const updateUser = async(req: Request, res: Response) => {

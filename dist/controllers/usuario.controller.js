@@ -26,6 +26,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.deleteUser = exports.updateUser = exports.createUsers = exports.getUsers = void 0;
 const Usuario_model_1 = require("../models/Usuario.model");
 const bcrypt_1 = __importDefault(require("bcrypt"));
+const http_status_codes_1 = require("http-status-codes");
 const getUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { limit = 100, offset = 0 } = req.query;
     const { count, rows: usuarios } = yield Usuario_model_1.Usuario.findAndCountAll({
@@ -52,7 +53,7 @@ const createUsers = (req, res) => __awaiter(void 0, void 0, void 0, function* ()
         estatus: true
     };
     const usuario = yield Usuario_model_1.Usuario.create(dataUsuario);
-    res.json(usuario);
+    res.status(http_status_codes_1.StatusCodes.CREATED).json(usuario);
 });
 exports.createUsers = createUsers;
 const updateUser = (req, res) => __awaiter(void 0, void 0, void 0, function* () {
