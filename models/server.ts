@@ -14,9 +14,9 @@ class Server {
     constructor() {
         this.app = express();
         this.path = {
-            usuarios: 'v1/api/usuarios',
-            todos: 'v1/api/todos',
-            auth: 'v1/api/auth'
+            usuarios: '/v1/api/usuarios',
+            todos: '/v1/api/todos',
+            auth: '/v1/api/auth'
         };
         this.port = 8080;
 
