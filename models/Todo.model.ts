@@ -2,7 +2,7 @@ import { DataTypes } from 'sequelize';
 
 import { Usuario } from './Usuario.model';
 import { db } from '../database/config.database';
-import { TodoModel } from '../interfaces/todo-model';
+import { TodoModel } from '../interfaces/todo-interface';
 
 export const Todo = db.define<TodoModel>('Todo', {
 
@@ -38,5 +38,3 @@ const initTodo = async() => {
 
 initTodo();
                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                          
-Usuario.hasMany(Todo, { foreignKey: 'usuarioid', sourceKey: 'usuarioid'} );
-Todo.belongsTo(Usuario, {foreignKey: 'usuarioid', targetKey: 'usuarioid' });

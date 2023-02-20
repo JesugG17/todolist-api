@@ -38,6 +38,4 @@ const initTodo = () => __awaiter(void 0, void 0, void 0, function* () {
     yield exports.Todo.sync();
 });
 initTodo();
-Usuario_model_1.Usuario.hasMany(exports.Todo, { foreignKey: 'usuarioid', sourceKey: 'usuarioid' });
-exports.Todo.belongsTo(Usuario_model_1.Usuario, { foreignKey: 'usuarioid', targetKey: 'usuarioid' });
 //# sourceMappingURL=Todo.model.js.map
