@@ -3,6 +3,7 @@ import request from 'supertest';
 
 import { Usuarios } from '../routes';
 
+// WARNING: This test are not fully completed, this crash because I dont made the configuration for Typescript already
 
 describe('Crea un usuario exitosamente', () => {
     it('Crea el usuario retornando 201', (done: Done) => {
@@ -33,5 +34,3 @@ describe('Intenta crear un usuario sin mandar el correo', () => {
         .expect(400, done)
     });
 });
-
-export default Usuarios;
