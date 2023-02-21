@@ -8,8 +8,10 @@ const sequelize_1 = require("sequelize");
 const config_1 = __importDefault(require("../config"));
 const user = config_1.default.DB_USERNAME;
 const password = config_1.default.DB_PASSWORD;
-exports.db = new sequelize_1.Sequelize('todolist', user, password, {
-    host: 'localhost',
+const database = config_1.default.DB_DATABASE;
+const host = config_1.default.SERVER_HOST;
+exports.db = new sequelize_1.Sequelize(database, user, password, {
+    host: host,
     dialect: 'mssql'
 });
 //# sourceMappingURL=config.database.js.map

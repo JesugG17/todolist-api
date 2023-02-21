@@ -12,7 +12,9 @@ const getConfig = () => {
     return {
         SECRETKEY: process.env.SECRETKEY,
         DB_USERNAME: process.env.DB_USERNAME,
-        DB_PASSWORD: process.env.DB_PASSWORD
+        DB_PASSWORD: process.env.DB_PASSWORD,
+        DB_DATABASE: process.env.DB_DATABASE,
+        SERVER_HOST: process.env.SERVER_HOST
     };
 };
 // Throwing an Error if any field was undefined we don't 

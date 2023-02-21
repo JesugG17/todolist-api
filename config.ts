@@ -12,12 +12,16 @@ interface ENV {
   SECRETKEY: string | undefined;
   DB_USERNAME: string | undefined;
   DB_PASSWORD: string | undefined;
+  DB_DATABASE: string | undefined;
+  SERVER_HOST: string | undefined
 }
 
 interface Config {
   SECRETKEY: string;
   DB_USERNAME: string;
   DB_PASSWORD: string;
+  DB_DATABASE: string;
+  SERVER_HOST: string;
 }
 
 // Loading process.env as ENV interface
@@ -26,7 +30,9 @@ const getConfig = (): ENV => {
   return {
     SECRETKEY: process.env.SECRETKEY,
     DB_USERNAME: process.env.DB_USERNAME,
-    DB_PASSWORD: process.env.DB_PASSWORD
+    DB_PASSWORD: process.env.DB_PASSWORD,
+    DB_DATABASE: process.env.DB_DATABASE,
+    SERVER_HOST: process.env.SERVER_HOST
   };
 };
 

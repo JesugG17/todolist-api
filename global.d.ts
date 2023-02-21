@@ -4,6 +4,8 @@ namespace NodeJS {
       SECRETKEY: string;
       DB_USERNAME: string;
       DB_PASSWORD: string;
+      DB_DATABASE: string,
+      SERVER_HOST: string
     }
 }
 
