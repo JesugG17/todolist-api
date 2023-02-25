@@ -1,11 +1,7 @@
 import { Done } from 'mocha';
-import request from 'supertest';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
-
-import { Usuarios } from '../routes';
 import { StatusCodes } from 'http-status-codes';
-import { UsuarioModel } from '../interfaces/usuario-interface';
 
 chai.use( chaiHttp );
 
