@@ -34,5 +34,10 @@ describe('POST /auth', () => {
             correo: 'asdasdasda',
             password: '123456'
         })
+        .end((err, res) => {
+            expect(res).to.have.status(StatusCodes.BAD_REQUEST);
+            expect(res.body)
+            done();
+        });
     }); 
 });

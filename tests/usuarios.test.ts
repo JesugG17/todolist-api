@@ -1,4 +1,4 @@
-import { Done } from 'mocha';
+import { Done, describe } from 'mocha';
 import chai from 'chai';
 import chaiHttp from 'chai-http';
 import { StatusCodes } from 'http-status-codes';
@@ -29,13 +29,14 @@ describe('POST /usuarios', () => {
         chai.request(url)
         .post('v1/api/usuarios')
         .send({
-            correo: 'miamor1@gmail.com',
+            correo: 'miamor2@gmail.com',
             password: '123456'
         })
         .end((err, res) => {
             expect(res).to.have.status(StatusCodes.CREATED);
+
             done();
-        });
+        })
     });
 });
 
@@ -51,3 +52,7 @@ describe('GET /usuarios', () => {
         });
     })
 });
+
+
+
+

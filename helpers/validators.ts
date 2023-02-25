@@ -24,3 +24,12 @@ export const existeCorreo = async( correo: string ) => {
         throw new Error(`El correo ${ correo } ya esta registrado`);
     }
 }
+
+export const deleteCreatedUser = async( usuarioid: number ) => {
+    
+    await Usuario.destroy({
+        where: {
+            usuarioid
+        }
+    })
+}
