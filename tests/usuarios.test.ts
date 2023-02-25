@@ -5,6 +5,7 @@ import chaiHttp from 'chai-http';
 
 import { Usuarios } from '../routes';
 import { StatusCodes } from 'http-status-codes';
+import { UsuarioModel } from '../interfaces/usuario-interface';
 
 chai.use( chaiHttp );
 
@@ -47,10 +48,9 @@ describe('GET /usuarios', () => {
         chai.request(url)
         .get('v1/api/usuarios')
         .end((err, res) => {
-
             expect(res).to.have.status(StatusCodes.OK);
             expect(res.body).not.to.be.empty;
-
+            expect(res.body.usuarios).to.be.an('array');
             done();
         });
     })
