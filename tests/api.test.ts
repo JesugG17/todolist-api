@@ -1,36 +1,42 @@
 import { Done } from 'mocha';
 import request from 'supertest';
+import chai from 'chai';
+import chaiHttp from 'chai-http';
 
 import { Usuarios } from '../routes';
 
-// WARNING: This test are not fully completed, this crash because I dont made the configuration for Typescript already
+chai.use( chaiHttp );
 
-describe('Crea un usuario exitosamente', () => {
-    it('Crea el usuario retornando 201', (done: Done) => {
-        request(Usuarios)
-        .post('/v1/api/usuarios')
-        .set('Accept', 'application/json')
-        .expect('Content-Type', /json/)
+const expect = chai.expect;
+const url = 'http://localhost:8080/'
+
+describe('POST /usuarios', () => {
+    it('Retorna un BAD REQUEST porque el correo ya esta registrado', (done: Done) => {
+        chai.request(url)
+        .post('v1/api/usuarios')
         .send({
-          'correo': 'jesus@gmail.com',
-          'password': '123456'
+            correo: 'jesus@gmail.com',
+            password: '123456'
         })
-        .expect(201, done)
-
+        .end((err, res) => {
+            expect(res).to.have.status(400);
+            done();
+        })
     });
     
 });
 
-describe('Intenta crear un usuario sin mandar el correo', () => {
-    it('Manda un mensaje de error retornando un 400 BAD REQUEST', (done: Done) => {
-        request(Usuarios)
-        .post('/v1/api/usuarios')
-        .set('Accept', 'application/json')
-        .expect('Accept', /json/)
+describe('POST /usuarios', () => {
+    it('Retorna un CREATED creando al nuevo usuario ', (done: Done) => {
+        chai.request(url)
+        .post('v1/api/usuarios')
         .send({
-            'correo': '',
-            'password': '123456'
+            correo: 'miamor@gmail.com',
+            password: '123456'
         })
-        .expect(400, done)
+        .end((err, res) => {
+            expect(res).to.have.status(201);
+            done();
+        })
     });
 });
