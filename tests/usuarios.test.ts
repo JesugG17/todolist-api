@@ -9,6 +9,11 @@ const expect = chai.expect;
 const url = 'http://localhost:8080/';
 const api = 'v1/api/usuarios';
 
+/*
+ NOTE: THIS TESTS IS ONLY FOR PRACTICE, I ALREADY TESTED ALL THE ENDPOINTS WITH
+ POSTMAN BUT I NEED TO KNOW HOW TO WORK WITH UNIT TEST WITH 'MOCHA, CHAI' ETC.
+*/
+
 describe('POST /usuarios ERR', () => {
     it('Retorna un BAD REQUEST porque el correo ya esta registrado', (done: Done) => {
         chai.request(url)
