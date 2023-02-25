@@ -9,6 +9,11 @@ const expect = chai.expect;
 const url = 'http://localhost:8080/'
 const api = 'v1/api/auth/login';
 
+/*
+ NOTE: THIS TESTS IS ONLY FOR PRACTICE, I ALREADY TESTED ALL THE ENDPOINTS WITH
+ POSTMAN BUT I NEED TO KNOW HOW TO WORK WITH UNIT TEST WITH 'MOCHA, CHAI' ETC.
+*/
+
 describe('POST /auth', () => {
     it('Retorna un status 200 siendo el login exitoso', (done: Done) => {
         chai.request(url)
