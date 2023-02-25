@@ -2,8 +2,7 @@ import { Request, Response } from "express";
 import { uuid } from 'uuidv4';
 import { Todo } from '../models/Todo.model';
 
-export const obtenerTodos = async(req: Request, res: Response) => {
-
+export const getTodos = async(req: Request, res: Response) => {
 
     const { offset = 0, limit = 100 } = req.query;
     const usuarioid = req.usuario?.usuarioid;
@@ -20,7 +19,7 @@ export const obtenerTodos = async(req: Request, res: Response) => {
     res.json({ count, todos });
 }
 
-export const crearTodo = async(req: Request, res: Response) => {
+export const createTodo = async(req: Request, res: Response) => {
 
     const { description } = req.body;
     
@@ -37,7 +36,7 @@ export const crearTodo = async(req: Request, res: Response) => {
     res.json({ todo });
 }
 
-export const actualizarTodo = async(req: Request, res: Response) => {
+export const updateTodo = async(req: Request, res: Response) => {
 
     const { id } = req.params;
     const { description } = req.body;
@@ -50,7 +49,7 @@ export const actualizarTodo = async(req: Request, res: Response) => {
     
 }
 
-export const eliminarTodo = async(req: Request, res: Response) => {
+export const deleteTodo = async(req: Request, res: Response) => {
     const { id } = req.params;
 
     const todo = await Todo.findByPk( id );

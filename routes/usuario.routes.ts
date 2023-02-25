@@ -3,7 +3,7 @@ import { Router } from 'express';
 import { validarJWT } from '../middlewares/validarJWT';
 import { check } from 'express-validator';
 import { existeCorreo } from '../helpers/validators';
-import { validateInputs } from '../middlewares/validar-campos';
+import { validateInputs } from '../middlewares/validate-inputs';
 
 import { getUsers,
          createUsers,
