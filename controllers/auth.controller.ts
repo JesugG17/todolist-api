@@ -54,6 +54,19 @@ export const logIn = async(req: Request, res: Response) => {
 
 export const register = async(req: Request,res: Response) => {
 
+    const { correo, password } = req.body;
 
+    const salt = bcrypt.genSaltSync();
+    const hashedPasswordd = bcrypt.hashSync(password, salt);
+    
+    const newUser = {
+        correo,
+        password: hashedPasswordd,
+        estatus: true
+    };
+
+    const usuario = await Usuario.create( newUser );
+
+    res.json({ usuario });
 
 }
