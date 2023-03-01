@@ -40,7 +40,6 @@ describe('POST /usuarios', () => {
         })
         .end((err, res) => {
             expect(res).to.have.status(StatusCodes.CREATED);
-
             done();
         })
     });
