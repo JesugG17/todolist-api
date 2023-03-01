@@ -67,6 +67,6 @@ export const register = async(req: Request,res: Response) => {
 
     const usuario = await Usuario.create( newUser );
 
-    res.json({ usuario });
+    res.status(StatusCodes.CREATED).json({ usuario });
 
 }

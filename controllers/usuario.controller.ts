@@ -1,7 +1,6 @@
 import { Request, Response } from 'express';
 import { Usuario } from '../models/Usuario.model';
 import bcrypt from 'bcrypt';
-import { StatusCodes } from 'http-status-codes';
 
 export const getUsers = async(req: Request, res: Response) => {
     
