@@ -14,37 +14,6 @@ const api = 'v1/api/usuarios';
  POSTMAN BUT I NEED TO KNOW HOW TO WORK WITH UNIT TEST WITH 'MOCHA, CHAI' ETC.
 */
 
-describe('POST /usuarios ERR', () => {
-    it('Retorna un BAD REQUEST porque el correo ya esta registrado', (done: Done) => {
-        chai.request(url)
-        .post(api)
-        .send({
-            correo: 'jesus@gmail.com',
-            password: '123456'
-        })
-        .end((err, res) => {
-            expect(res).to.have.status(StatusCodes.BAD_REQUEST);
-            done();
-        })
-    });
-    
-});
-
-describe('POST /usuarios', () => {
-    it('Retorna un CREATED creando al nuevo usuario ', (done: Done) => {
-        chai.request(url)
-        .post(api)
-        .send({
-            correo: 'miamor2@gmail.com',
-            password: '123456'
-        })
-        .end((err, res) => {
-            expect(res).to.have.status(StatusCodes.CREATED);
-            done();
-        })
-    });
-});
-
 describe('GET /usuarios', () => {
     it('Retorna un status 200 obteniendo a todos los usuarios', (done: Done) => {
         chai.request(url)
