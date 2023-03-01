@@ -6,7 +6,6 @@ import { existeCorreo } from '../helpers/validators';
 import { validateInputs } from '../middlewares/validate-inputs';
 
 import { getUsers,
-         createUsers,
          updateUser,
          deleteUser } from '../controllers/usuario.controller';
 
@@ -14,12 +13,6 @@ import { getUsers,
 const router = Router();
 
 router.get('/', getUsers);
-
-router.post('/',[
-    check('correo', 'El correo es obligatorio').not().isEmpty(),
-    check('correo').custom( existeCorreo ),
-    validateInputs
-], createUsers);
 
 router.put('/',[
     validarJWT
