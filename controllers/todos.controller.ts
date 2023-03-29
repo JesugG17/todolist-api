@@ -53,8 +53,7 @@ export const deleteTodo = async(req: Request, res: Response) => {
     const { id } = req.params;
 
     const todo = await Todo.findByPk( id );
-
-    await todo?.update({ estatus: false });
-
+    
+    await todo?.destroy();
     res.json({ todo });
 }
