@@ -1,48 +1,41 @@
-import { Usuario } from '../models/Usuario.model';
-import bcrypt from 'bcrypt';
-import { Request } from 'express';
-// TODO: HACER EL SERVICE DE LOS 
+import bcrypt from "bcrypt";
+
+import { Usuario } from "../models/Usuario.model";
+import { UpdateUsuarioDto } from "../models/update.user.dto";
 
 export class UsuarioService {
+    
+  static async findAll() {
+    const { count, rows: usuarios } = await Usuario.findAndCountAll({
+      where: {
+        estatus: true,
+      },
+    });
+    console.log(usuarios);
+    return { count, usuarios };
+  }
 
+  static async update(id: number, updateUsuarioDto: UpdateUsuarioDto) {
+    const { password } = updateUsuarioDto;
 
-    static async findAll() {
-
-        const { count, rows: usuarios } = await Usuario.findAndCountAll({
-            where: {
-                estatus: true
-            }
-        });
-        console.log(usuarios);
-        return { count, usuarios };
+    if (password) {
+      const salt = bcrypt.genSaltSync();
+      const hashedPassword = bcrypt.hashSync(password, salt);
+      updateUsuarioDto.password = hashedPassword;
     }
 
-    static async update(req: Request) {
-        const id = req.usuario?.usuarioid;
-        const { password, ...cambios } = req.body;
+    const usuario = await Usuario.findByPk(id);
 
-        if (password) {
-            const salt = bcrypt.genSaltSync();
-            const hashedPassword = bcrypt.hashSync(password, salt);
-            cambios.password = hashedPassword;
-        }
+    await usuario?.update(updateUsuarioDto);
 
-        const usuario = await Usuario.findByPk( id );
+    return usuario;
+  }
 
-        await usuario?.update( cambios );
+  static async delete(id: number) {
+    const usuario = await Usuario.findByPk(id);
 
-        return usuario;
-    }
+    await usuario?.update({estatus: false});
 
-    static async delete(req: Request) {
-        const id = req.usuario?.usuarioid;
-
-        const usuario = await Usuario.findByPk( id );
-
-        await usuario?.update({ estatus: false });
-
-        return usuario;
-    }
-
-
+    return usuario;
+  }
 }

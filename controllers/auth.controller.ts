@@ -1,43 +1,16 @@
 import { Request, Response } from "express";
-import bcrypt from 'bcrypt';
 import { StatusCodes } from 'http-status-codes';
 
-import { Usuario } from '../models/Usuario.model';
-import { generarJWT } from "../helpers/generarJWT";
+import { AuthService } from "../services/auth.service";
+import { CreateUsuarioDto } from '../models/create-user.dto';
 
 export const logIn = async(req: Request, res: Response) => {
 
-    const { correo, password } = req.body;
+    const createUserDto = req.body as CreateUsuarioDto;
     
     try {
         
-        const usuario = await Usuario.findOne({
-            where: {
-                correo
-            }
-        });
-
-        if (!usuario) {
-            return res.status(StatusCodes.NOT_FOUND).json({
-                msg: `El correo ${ correo } no existe`
-            });
-        }
-
-        if (!usuario.estatus) {
-            return res.status(StatusCodes.NOT_FOUND).json({
-                msg: `El usuario con el correo ${ correo } no existe`
-            });
-        }
-
-        const isValidPassword = bcrypt.compareSync(password, usuario.password);
-
-        if (!isValidPassword) {
-            return res.status(StatusCodes.BAD_REQUEST).json({
-                msg: 'La contraseña no es correcta'
-            });
-        }
-
-        const token = await generarJWT( usuario.usuarioid );
+        const { usuario, token } = await AuthService.find(createUserDto);
 
         res.json({
             usuario,
@@ -54,18 +27,9 @@ export const logIn = async(req: Request, res: Response) => {
 
 export const register = async(req: Request,res: Response) => {
 
-    const { correo, password } = req.body;
+    const createUsuarioDto = req.body as CreateUsuarioDto;
 
-    const salt = bcrypt.genSaltSync();
-    const hashedPasswordd = bcrypt.hashSync(password, salt);
-    
-    const newUser = {
-        correo,
-        password: hashedPasswordd,
-        estatus: true
-    };
-
-    const usuario = await Usuario.create( newUser );
+    const usuario = await AuthService.create(createUsuarioDto);
 
     res.status(StatusCodes.CREATED).json({ usuario });
 
