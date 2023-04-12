@@ -1,14 +1,9 @@
-// TODO: HACER EL SERVICE DE LOS TODOS
-
-import { Request } from "express";
 import { v4 as uuid } from 'uuid';
 import { Todo } from '../models/Todo.model';
 
-
 export class TodosService {
 
-    static async findAll(req: Request) {
-        const usuarioid = req.usuario?.usuarioid;
+    static async findAll(usuarioid: number) {
     
         const { count, rows: todos } = await Todo.findAndCountAll({
             where: {
@@ -20,33 +15,30 @@ export class TodosService {
         return { count, todos };
     }
 
-    static async create(req: Request) {
-        const { description } = req.body;
+    static async create(usuarioid: number, description: string) {
     
         const data = {
             todoId: uuid(),
             description,
             estatus: true,
-            usuarioid: req.usuario?.usuarioid
+            usuarioid
         };
 
         return await Todo.create(data);
     }
 
-    static async update(req: Request) {
-        const { id } = req.params;
-        const { description } = req.body;
+    static async update(todoid: string, description: string) {
 
-        const todo = await Todo.findByPk( id );
+        const todo = await Todo.findByPk( todoid );
 
         return await todo?.update({ description });
     }
 
-    static async delete(req: Request) {
-        const { id } = req.params;
+    static async delete(todoid: string) {
 
-        const todo = await Todo.findByPk( id );
+        const todo = await Todo.findByPk( todoid );
         
         await todo?.destroy();
     }
+
 }

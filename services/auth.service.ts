@@ -6,8 +6,7 @@ import { generarJWT } from '../helpers/generarJWT';
 
 export class AuthService {
 
-
-    static async find(createUsuarioDto: CreateUsuarioDto) {
+    static async logIn(createUsuarioDto: CreateUsuarioDto) {
         
         const { correo, password } = createUsuarioDto;
 
@@ -32,7 +31,7 @@ export class AuthService {
         return { token, usuario }
     }
 
-    static async create(createUsuarioDto: CreateUsuarioDto) {
+    static async register(createUsuarioDto: CreateUsuarioDto) {
         const salt = bcrypt.genSaltSync();
         const hashedPassword = bcrypt.hashSync(createUsuarioDto.password, salt);
         

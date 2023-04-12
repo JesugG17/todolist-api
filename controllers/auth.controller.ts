@@ -6,11 +6,10 @@ import { CreateUsuarioDto } from '../models/create-user.dto';
 
 export const logIn = async(req: Request, res: Response) => {
 
-    const createUserDto = req.body as CreateUsuarioDto;
     
     try {
         
-        const { usuario, token } = await AuthService.find(createUserDto);
+        const { usuario, token } = await AuthService.logIn(req.body as CreateUsuarioDto);
 
         res.json({
             usuario,
@@ -26,11 +25,7 @@ export const logIn = async(req: Request, res: Response) => {
 }
 
 export const register = async(req: Request,res: Response) => {
-
-    const createUsuarioDto = req.body as CreateUsuarioDto;
-
-    const usuario = await AuthService.create(createUsuarioDto);
-
-    res.status(StatusCodes.CREATED).json({ usuario });
-
+    return res.status(StatusCodes.CREATED).json({
+        usuario: await AuthService.register(req.body as CreateUsuarioDto)
+    });
 }
