@@ -9,6 +9,9 @@ export const Usuario = db.define<UsuarioModel>('Usuario', {
         primaryKey: true,
         autoIncrement: true
     },
+    nombre: {
+        type: DataTypes.STRING
+    },
     correo: {
         type: DataTypes.STRING
     },

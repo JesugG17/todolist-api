@@ -16,7 +16,7 @@ export const createTodo = async(req: Request, res: Response) => {
     const { description } = req.body;
 
     const todo = await TodosService.create(usuarioid, description);
-
+    console.log(todo);
     res.json({ todo });
 }
 
@@ -33,4 +33,8 @@ export const updateTodo = async(req: Request, res: Response) => {
 
 export const deleteTodo = async(req: Request, res: Response) => {
     await TodosService.delete(req.params.id);
+
+    res.json({
+        ok: true
+    })
 }

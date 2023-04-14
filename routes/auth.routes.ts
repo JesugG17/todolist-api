@@ -14,11 +14,12 @@ router.post('/login', [
 ], logIn);
 
 router.post('/register',[
+    check('nombre', 'El nombre es obligatorio').not().isEmpty(),
     check('correo', 'El correo es obligatorio').isEmail(),
     check('correo', 'El correo es obligatorio').not().isEmpty(),
     check('correo').custom(existeCorreo),
     check('password', 'La contraseña es obligatoria').not().isEmpty(),
-    check('password', 'La longitud minima de la contraseña es de 8 caracteres').isLength({min: 6, max:16}),
+    check('password', 'La longitud minima de la contraseña es de 6 caracteres').isLength({min: 6, max:16}),
     validateInputs
 ], register);
 

@@ -38,6 +38,8 @@ export class TodosService {
 
         const todo = await Todo.findByPk( todoid );
         
+        console.log(todo);
+
         await todo?.destroy();
     }
 
