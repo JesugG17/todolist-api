@@ -8,8 +8,8 @@ import { existeCorreo } from '../helpers/validators';
 const router = Router();
 
 router.post('/login', [
-    check('correo', 'el correo no es valido').isEmail(),
     check('password', 'la contraseña es obligatoria').not().isEmpty(),
+    check('correo', 'el correo no es valido').isEmail(),
     validateInputs
 ], logIn);
 

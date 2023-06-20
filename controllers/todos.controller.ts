@@ -16,7 +16,6 @@ export const createTodo = async(req: Request, res: Response) => {
     const { description } = req.body;
 
     const todo = await TodosService.create(usuarioid, description);
-    console.log(todo);
     res.json({ todo });
 }
 

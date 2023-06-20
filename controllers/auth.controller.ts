@@ -6,18 +6,16 @@ import { CreateUsuarioDto } from '../models/create-user.dto';
 
 export const logIn = async(req: Request, res: Response) => {
 
-    
     try {
         
         const { usuario, token } = await AuthService.logIn(req.body as CreateUsuarioDto);
-
         res.json({
-            usuario,
+            nombre: usuario.nombre,
             token
         });
 
     } catch (error) {
-        res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        res.status(StatusCodes.BAD_REQUEST).json({
             error
         })
     }

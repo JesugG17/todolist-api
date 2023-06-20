@@ -21,7 +21,6 @@ export class AuthService {
         }
 
         const isValidPassword = bcrypt.compareSync(password, usuario.password);
-
         if (!isValidPassword) {
             throw new Error('La contraseña es incorrecta');
         }
