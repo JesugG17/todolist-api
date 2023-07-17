@@ -4,5 +4,5 @@ import 'reflect-metadata';
 
 dotenv.config();
 const app = new Server();
-
+app.startServer();
 

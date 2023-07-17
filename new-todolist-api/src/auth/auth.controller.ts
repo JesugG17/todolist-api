@@ -1,4 +1,4 @@
-import { Request, Response } from "express";
+import { Request, Response } from 'express';
 
 export class AuthController {
 
@@ -8,5 +8,6 @@ export class AuthController {
 
     logIn(req: Request, res: Response) {
         
+        res.json({ msg: 'hola mundo' });
     }
 }
