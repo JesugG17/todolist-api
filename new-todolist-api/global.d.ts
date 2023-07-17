@@ -1,6 +1,9 @@
 
 namespace NodeJS {
     interface ProcessEnv {
+      DB_USERNAME: string;
+      DB_PASSWORD: string;
+      DB_NAME: string;
       // YOUR ENVIROMENT VARIALBES THAT YOU LIKE TO ADD
     }
 }
