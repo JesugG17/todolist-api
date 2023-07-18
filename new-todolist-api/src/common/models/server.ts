@@ -2,7 +2,7 @@ import express, { Application } from 'express';
 import cors from 'cors';
 import { AppDataSource } from '../db/data-source';
 import { Paths } from '../types/paths.interface';
-import AuthRouter from '../auth/auth.routes';
+import AuthRouter from '../../modules/auth/auth.routes';
 
 export class Server {
 

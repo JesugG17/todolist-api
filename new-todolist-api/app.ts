@@ -1,5 +1,5 @@
 import dotenv from 'dotenv';
-import { Server } from './src/models/server';
+import { Server } from './src/common/models/server';
 import 'reflect-metadata';
 
 dotenv.config();
