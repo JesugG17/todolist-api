@@ -1,9 +1,10 @@
-import express, { Application, Request, Response, Router } from "express";
+import express, { Application, Request, Response } from "express";
 import cors from "cors";
 import { AppDataSource } from "../db/data-source";
 import { Paths } from "../types/paths.interface";
 import AuthRouter from "../../modules/auth/auth.routes";
-import { AuthController } from "../../modules/auth/auth.controller";
+import TasksRouter from '../../modules/tasks/tasks.routes';
+import bodyParser from "body-parser";
 
 export class Server {
   private app: Application;
@@ -18,31 +19,28 @@ export class Server {
       task: "/api/task",
     };
 
-    this.configureRoutes();
+    this.middlewares();
 
-    this.configureMiddlewares();
+    this.routes();
 
     this.startDatabase();
-  }
 
-  test() {
-    this.app.get("/api/auth", (req: Request, res: Response) => {
-      res.json({ msg: "hola mundo" });
-    });
   }
 
   private async startDatabase() {
     await AppDataSource.initialize();
   }
 
-  private configureMiddlewares() {
+  private middlewares() {
     this.app.use(cors());
-    this.app.use(express.json());
+    this.app.use(bodyParser.json());
+    this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(express.static("public"));
   }
 
-  private configureRoutes() {
+  private routes() {
     this.app.use(this.paths.auth, AuthRouter);
+    this.app.use(this.paths.task, TasksRouter);
   }
 
   startServer() {
