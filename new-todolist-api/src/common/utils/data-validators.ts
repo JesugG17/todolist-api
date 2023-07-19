@@ -10,3 +10,13 @@ export const emailExists = async(email: string) => {
         throw new Error('This email already exists');
     }
 }
+
+export const emailNotExists = async(email: string) => {
+
+    const user = await Users.findOneBy({ email });
+
+    if (!user) {
+        throw new Error('this emails not exists');
+    }
+
+}

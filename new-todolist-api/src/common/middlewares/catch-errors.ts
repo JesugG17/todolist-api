@@ -4,12 +4,16 @@ import { StatusCodes } from 'http-status-codes';
 
 export const catchErrors = (req: Request, res: Response, next: NextFunction) => {
 
-    const errors = validationResult(req);
+    const error = validationResult(req).formatWith(({ msg }) => msg);
 
-    if (!errors.isEmpty()) {
+    const normalizedErrors = error.array().map( error => ({ msg: error }));
+
+    const hasError = !error.isEmpty();
+
+    if (hasError) {
         return res.json({
             data: null,
-            message: errors,
+            message: normalizedErrors,
             code: StatusCodes.BAD_REQUEST,
         })
     }

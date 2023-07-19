@@ -5,8 +5,13 @@ import { CreateUserDto } from './dto/create-user-dto';
 export class AuthController {
 
     
-    logIn(req: Request, res: Response) {
-        
+    async logIn(req: Request, res: Response) {
+        const authService = new AuthService()
+        const { email, password } = req.body;
+
+        const response = await authService.logIn(email, password);
+
+        res.json(response);
     }
 
     async register(req: Request, res: Response) {

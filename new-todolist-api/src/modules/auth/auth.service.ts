@@ -1,14 +1,43 @@
 import bcrypt from 'bcrypt';
 import { StatusCodes } from 'http-status-codes';
-import { CreateUserDto } from "./dto/create-user-dto";
-import { Users } from "./entities";
+import { CreateUserDto } from './dto/create-user-dto';
+import { Users } from './entities';
+import { generateJWT } from '../../common/utils/generateJWT';
 
 
 export class AuthService  {
 
 
-    async logIn(email: string, password: string){
+    async logIn(email: string, password: string) {
+        try {
 
+            const user = await Users.findOneBy({ email }) as Users;
+
+            const isValidPassword = bcrypt.compareSync(password, user.password);
+            
+            if (!isValidPassword) {
+                return {
+                    message: 'The password is incorrect',
+                    data: null,
+                    code: StatusCodes.BAD_REQUEST
+                }
+            }
+
+            const token = await generateJWT(user.userid);
+
+            return {
+                message: 'Login succesfully',
+                data: { user, token },
+                code: StatusCodes.OK
+            }
+
+        } catch (error)  {
+            return {
+                message: 'A internal server error has ocurred',
+                data: null,
+                code: StatusCodes.INTERNAL_SERVER_ERROR
+            }
+        }
     }
 
     async register(createUserDto: CreateUserDto) {
@@ -33,7 +62,6 @@ export class AuthService  {
             }
 
         } catch (error) {
-            console.log(error);
             return {
                 message: 'A internal server error has ocurred',
                 data: null,
