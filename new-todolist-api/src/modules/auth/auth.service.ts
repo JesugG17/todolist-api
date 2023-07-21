@@ -27,7 +27,7 @@ export class AuthService  {
 
             return {
                 messages: ['Login succesfully'],
-                data: { user, token },
+                data: { user: user.userName, token },
                 code: StatusCodes.OK
             }
 
