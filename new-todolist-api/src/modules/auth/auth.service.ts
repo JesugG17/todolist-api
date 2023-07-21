@@ -3,6 +3,7 @@ import { StatusCodes } from 'http-status-codes';
 import { CreateUserDto } from './dto/create-user-dto';
 import { Users } from './entities';
 import { generateJWT } from '../../common/utils/generateJWT';
+import { googleVerify } from '../../common/utils/googleVerify';
 
 
 export class AuthService  {
@@ -57,7 +58,7 @@ export class AuthService  {
 
             return {
                 messages: ['User registered successfully!'],
-                data: newUser,
+                data: null,
                 code: StatusCodes.CREATED
             }
 
@@ -70,7 +71,36 @@ export class AuthService  {
         }
     }
 
-    googleSignIn() {
+    async googleSignIn(code: string) {
+        const data = await googleVerify(code);
+
+        if (!data.ok) {
+            return {
+                data:null,
+                messages: ['Google sign in failed'],
+                code: StatusCodes.BAD_REQUEST
+            }
+        }
+
+        let user = await Users.findOneBy({ email: data.email });
+
+        if (!user) {
+            user = new Users();
+            user.email = data.email as string;
+            user.userName = data.name as string;
+            user.password = bcrypt.hashSync(':P', bcrypt.genSaltSync());
+            user.google = true;
+            user.status = true;
+            user.save();
+        }
+
+        const token = await generateJWT(user.userid);
+
+        return {
+            data: {user: user.userName, token},
+            message: ['Sign in successfully'],
+            code: StatusCodes.OK
+        }
         
     }
 

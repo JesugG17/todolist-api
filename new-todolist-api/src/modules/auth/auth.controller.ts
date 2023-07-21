@@ -23,8 +23,13 @@ export class AuthController {
         res.json(response);
     }
 
-    googleSignIn(req: Request, res: Response) {
+    async googleSignIn(req: Request, res: Response) {
+        const authService = new AuthService();
+        const { code } = req.body;
 
+        const response = await authService.googleSignIn(code);
+
+        res.json(response);
     }
 
 }

@@ -5,6 +5,8 @@ namespace NodeJS {
       DB_PASSWORD: string;
       DB_NAME: string;
       SECRET_KEY: string;
+      GOOGLE_ID: string;
+      GOOGLE_SECRET: string;
       // YOUR ENVIROMENT VARIALBES THAT YOU LIKE TO ADD
     }
 }

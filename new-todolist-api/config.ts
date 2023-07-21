@@ -13,6 +13,8 @@ interface ENV {
   DB_PASSWORD: string;
   DB_NAME: string;
   SECRET_KEY: string;
+  GOOGLE_ID: string;
+  GOOGLE_SECRET: string;
   // SECRETKEY: string | undefined;
   // your enviroment variables declared like the commented line above
 }
@@ -22,6 +24,8 @@ interface Config {
   DB_PASSWORD: string;
   DB_NAME: string;
   SECRET_KEY: string;
+  GOOGLE_ID: string;
+  GOOGLE_SECRET: string;
   // SECRETKEY: string;
   // Again your enviroments variables declared like the commented line above
 }
@@ -33,7 +37,9 @@ const getConfig = (): ENV => {
     DB_NAME: process.env.DB_NAME,
     DB_PASSWORD: process.env.DB_PASSWORD,
     DB_USERNAME: process.env.DB_USERNAME,
-    SECRET_KEY: process.env.SECRET_KEY
+    SECRET_KEY: process.env.SECRET_KEY,
+    GOOGLE_ID: process.env.GOOGLE_ID,
+    GOOGLE_SECRET: process.env.GOOGLE_SECRET
   };
 };
 

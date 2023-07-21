@@ -20,4 +20,9 @@ export class Users extends BaseEntity {
     })
     status: boolean;
 
+    @Column({
+        default: false
+    })
+    google: boolean;
+
 }
