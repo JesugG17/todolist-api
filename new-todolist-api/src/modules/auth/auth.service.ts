@@ -53,6 +53,7 @@ export class AuthService  {
             newUser.email = email;
             newUser.password = bcrypt.hashSync(password, salt);
             newUser.status = true;
+            newUser.google = false;
 
             await newUser.save();
 
@@ -63,6 +64,7 @@ export class AuthService  {
             }
 
         } catch (error) {
+            console.log(error);
             return {
                 messages: ['A internal server error has ocurred'],
                 data: null,

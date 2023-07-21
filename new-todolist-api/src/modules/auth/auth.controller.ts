@@ -29,6 +29,7 @@ export class AuthController {
 
         const response = await authService.googleSignIn(code);
 
+        console.log(response);
         res.json(response);
     }
 
