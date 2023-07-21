@@ -17,7 +17,7 @@ export class AuthService  {
             
             if (!isValidPassword) {
                 return {
-                    message: 'The password is incorrect',
+                    messages: ['The password is incorrect'],
                     data: null,
                     code: StatusCodes.BAD_REQUEST
                 }
@@ -26,14 +26,14 @@ export class AuthService  {
             const token = await generateJWT(user.userid);
 
             return {
-                message: 'Login succesfully',
+                messages: ['Login succesfully'],
                 data: { user, token },
                 code: StatusCodes.OK
             }
 
         } catch (error)  {
             return {
-                message: 'A internal server error has ocurred',
+                messages: ['A internal server error has ocurred'],
                 data: null,
                 code: StatusCodes.INTERNAL_SERVER_ERROR
             }
@@ -56,14 +56,14 @@ export class AuthService  {
             await newUser.save();
 
             return {
-                message: 'User registered successfully!',
+                messages: ['User registered successfully!'],
                 data: newUser,
                 code: StatusCodes.CREATED
             }
 
         } catch (error) {
             return {
-                message: 'A internal server error has ocurred',
+                messages: ['A internal server error has ocurred'],
                 data: null,
                 code: StatusCodes.INTERNAL_SERVER_ERROR
             }
