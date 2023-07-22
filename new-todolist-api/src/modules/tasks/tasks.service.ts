@@ -1,7 +1,7 @@
 import { StatusCodes } from "http-status-codes";
-import { CreateTaskDto } from "./dto/create-task.dto";
+import { v4 as uuid } from 'uuid';
 import { Tasks } from "./entities/task.entity";
-// import { nanoid } from "nanoid";
+import { UpdateTaskDto } from './dto/update-task.dto';
 
 
 export class TasksService {
@@ -18,12 +18,12 @@ export class TasksService {
         }
     }
 
-    async create(createTaskDto: CreateTaskDto, userId: number) {
+    async create(description: string, userId: number) {
         try {
 
             const task = new Tasks();
-            task.description = createTaskDto.description;
-            task.taskId = '';
+            task.description = description;
+            task.taskId = uuid();
             task.status = true;
             task.userId = userId;
             
@@ -38,13 +38,44 @@ export class TasksService {
         } catch (error) {
             return {
                 data: null,
-                message: 'An error has ocurred while creating tasks, try again',
-                code: StatusCodes.BAD_REQUEST
+                message: 'An error has ocurred while creating task...',
+                code: StatusCodes.INTERNAL_SERVER_ERROR
             }
         }
     }
 
-    async update(taskId: string) {
+    async update(updateTaskDto: UpdateTaskDto, taskId: string) {
+        try {
+            
+            const task = await Tasks.findOneBy({ taskId });
+
+            if (!task) {
+                return {
+                    data: null,
+                    message: `The task with id ${ taskId } do not exists`,
+                    code: StatusCodes.BAD_REQUEST
+                }
+            }
+
+            task.description = updateTaskDto.description ?? task.description;
+            task.status = updateTaskDto.status ?? task.status
+
+            await task.save();
+            
+            return {
+                data: null,
+                message: 'Tasks updated successfully',
+                code: StatusCodes.OK
+            }
+
+        } catch (error) {
+            return {
+                data: null,
+                message: 'An error has ocurred while updating task...',
+                code: StatusCodes.INTERNAL_SERVER_ERROR
+            }
+        }
+
 
     }
 

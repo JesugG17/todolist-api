@@ -1,6 +1,13 @@
 import { Express } from 'express';
 import Request from 'express';
-namespace NodeJS {
+
+declare global {
+  namespace Express {
+    export interface Request {
+      userId?: number;
+    }
+  }
+  namespace NodeJS {
     interface ProcessEnv {
       DB_USERNAME: string;
       DB_PASSWORD: string;
@@ -11,13 +18,4 @@ namespace NodeJS {
       // YOUR ENVIROMENT VARIALBES THAT YOU LIKE TO ADD
     }
 }
-
-
-// THE CODE OF BELOW IS FOR EXTEND THE REQUEST TYPE OF EXPRESS
-declare global {
-  namespace Express {
-    export interface Request {
-      userId?: number;
-    }
-  }
 }

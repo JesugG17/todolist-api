@@ -1,6 +1,7 @@
 import { DataSource } from 'typeorm';
 import config from '../../../config';
 import { Users } from '../../modules/auth/entities';
+import { Tasks } from '../../modules/tasks/entities/task.entity';
 
 const userName = config.DB_USERNAME;
 const password = config.DB_PASSWORD;
@@ -12,7 +13,7 @@ export const AppDataSource = new DataSource({
     username: userName,
     password: password,
     database: database,
-    entities: [Users], 
+    entities: [Users, Tasks], 
     extra: {
         trustServerCertificate: true
     }

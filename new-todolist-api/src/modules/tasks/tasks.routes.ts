@@ -10,7 +10,9 @@ router.get('/all',[
     validateJWT
 ] ,tasksController.getAll);
 
-router.post('/create', tasksController.create);
+router.post('/create',[
+    validateJWT
+], tasksController.create);
 
 router.put('/update/:id', tasksController.update);
 
