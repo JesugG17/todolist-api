@@ -61,7 +61,7 @@ export class TasksService {
             task.status = updateTaskDto.status ?? task.status
 
             await task.save();
-            
+
             return {
                 data: null,
                 message: 'Tasks updated successfully',
@@ -80,6 +80,22 @@ export class TasksService {
     }
 
     async delete(taskId: string) {
+        try {
+            
+            await Tasks.delete({ taskId });
 
+            return {
+                data: null,
+                message: 'Task deleted successfully',
+                code: StatusCodes.OK
+            }
+
+        } catch (error) {
+            return {
+                data: null,
+                message: 'An error has ocurred while deleting task...',
+                code: StatusCodes.INTERNAL_SERVER_ERROR
+            }
+        }
     }
 }
