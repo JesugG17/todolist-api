@@ -1,6 +1,9 @@
 import { Router } from 'express';
+import { check } from 'express-validator';
 import { TaskController } from './tasks.controller';
 import { validateJWT } from '../../common/middlewares/validateJWT';
+import { catchErrors } from '../../common/middlewares';
+import { tasksExists } from '../../common/utils/data-validators';
 
 const router = Router();
 
@@ -11,11 +14,19 @@ router.get('/all',[
 ] ,tasksController.getAll);
 
 router.post('/create',[
-    validateJWT
+    validateJWT,
+    check('description', 'Must send a description to create task').not().isEmpty(),
+    catchErrors
 ], tasksController.create);
 
-router.put('/update/:id', tasksController.update);
+router.put('/update/:id',[
+    check(':id').custom(tasksExists),
+    catchErrors
+], tasksController.update);
 
-router.delete('/delete/:id', tasksController.delete);
+router.delete('/delete/:id',[
+    check(':id').custom(tasksExists),
+    catchErrors
+], tasksController.delete);
 
 export default router;

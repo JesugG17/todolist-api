@@ -1,4 +1,5 @@
 import { Users } from "../../modules/auth/entities"
+import { Tasks } from "../../modules/tasks/entities/task.entity";
 
 
 
@@ -19,4 +20,12 @@ export const emailNotExists = async(email: string) => {
         throw new Error('this emails do not exists');
     }
 
+}
+
+export const tasksExists = async(taskId: string) => {
+    const task = await Tasks.findOneBy({ taskId });
+
+    if (!task) {
+        throw new Error(`The task with id ${ taskId } do not exists`)
+    }
 }

@@ -28,7 +28,7 @@ export class TaskController {
         const tasksId = req.params.id;
         const updateTaskDto = req.body as UpdateTaskDto;
 
-        const response = await taskService.update(updateTaskDto, tasksId);
+        const response = await taskService.update(updateTaskDto,  tasksId);
 
         res.status(response.code).json(response);
     }
