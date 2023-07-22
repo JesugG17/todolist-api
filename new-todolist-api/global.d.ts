@@ -1,4 +1,5 @@
-
+import { Express } from 'express';
+import Request from 'express';
 namespace NodeJS {
     interface ProcessEnv {
       DB_USERNAME: string;
@@ -13,7 +14,6 @@ namespace NodeJS {
 
 
 // THE CODE OF BELOW IS FOR EXTEND THE REQUEST TYPE OF EXPRESS
-
 declare global {
   namespace Express {
     export interface Request {

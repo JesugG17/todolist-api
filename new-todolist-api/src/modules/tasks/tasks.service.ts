@@ -7,9 +7,15 @@ import { Tasks } from "./entities/task.entity";
 export class TasksService {
     
     async getAll(userId: number) {
-        return await Tasks.find({
+        const tasks = await Tasks.find({
             where: { userId }
         });
+
+        return {
+            data: tasks,
+            message: null,
+            code: StatusCodes.OK
+        }
     }
 
     async create(createTaskDto: CreateTaskDto, userId: number) {
@@ -32,7 +38,7 @@ export class TasksService {
         } catch (error) {
             return {
                 data: null,
-                message: 'An error has ocurren while creating tasks, try again',
+                message: 'An error has ocurred while creating tasks, try again',
                 code: StatusCodes.BAD_REQUEST
             }
         }

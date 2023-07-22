@@ -1,15 +1,15 @@
 import { Request, Response } from "express";
 import { TasksService } from "./tasks.service";
-import { IRequest } from "../../common/types/irequest.interface";
 
 export class TaskController {
 
     async getAll(req: Request, res: Response) {
         const taskService = new TasksService();
+        const userId = req.userId;
 
-        // console.log(req.userId);
+        const response = await taskService.getAll(userId as number);
 
-        res.json({ msg: 'ok' });
+        res.json(response);
     }
 
     async  create(req: Request, res: Response) {

@@ -19,15 +19,15 @@ export const validateJWT = async(req: Request, res: Response, next: NextFunction
         
         const { userId } = jwt.verify(token as string, config.SECRET_KEY) as { userId: number}
         
-        // TODO: Make sure that request object can store userId
-        
+        req.userId = userId;
+
         next();
 
     } catch (error) {
-        return res.status(StatusCodes.INTERNAL_SERVER_ERROR).json({
+        return res.status(StatusCodes.UNAUTHORIZED).json({
             data: null,
-            message: 'An error has ocurred while validating jwt...',
-            code: StatusCodes.INTERNAL_SERVER_ERROR
+            message: 'Invalid token',
+            code: StatusCodes.UNAUTHORIZED
         });
     }
 
