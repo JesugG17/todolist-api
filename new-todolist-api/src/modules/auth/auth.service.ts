@@ -5,9 +5,7 @@ import { Users } from './entities';
 import { generateJWT } from '../../common/utils/generateJWT';
 import { googleVerify } from '../../common/utils/googleVerify';
 
-
 export class AuthService  {
-
 
     async logIn(email: string, password: string) {
         try {

@@ -14,10 +14,10 @@ namespace NodeJS {
 
 // THE CODE OF BELOW IS FOR EXTEND THE REQUEST TYPE OF EXPRESS
 
-// declare global {
-//   namespace Express {
-//     export interface Request {
-//       usuario?: UsuarioModel;
-//     }
-//   }
-// }
+declare global {
+  namespace Express {
+    export interface Request {
+      userId?: number;
+    }
+  }
+}
