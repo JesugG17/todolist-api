@@ -15,10 +15,10 @@ export class TaskController {
 
     async  create(req: Request, res: Response) {
         const taskService = new TasksService();
-        const { description } = req.body;
+        const { description, completed = false } = req.body;
         const userId = req.userId as number;
 
-        const response = await taskService.create(description, userId);
+        const response = await taskService.create(description, completed, userId);
 
         res.status(response.code).json(response);
     }
@@ -33,11 +33,20 @@ export class TaskController {
         res.status(response.code).json(response);
     }
 
-    async delete(req: Request, res: Response) {
+    async deleteOne(req: Request, res: Response) {
         const taskService = new TasksService();
         const taskId = req.params.id;
 
-        const response = await taskService.delete(taskId);
+        const response = await taskService.deleteOne(taskId);
+
+        res.status(response.code).json(response);
+    }
+
+    async deleteMultiple(req: Request, res: Response) {
+        const taskService = new TasksService();
+        const { tasks } = req.body;
+        console.log(tasks);
+        const  response = await taskService.deleteMultiple(tasks);
 
         res.status(response.code).json(response);
     }

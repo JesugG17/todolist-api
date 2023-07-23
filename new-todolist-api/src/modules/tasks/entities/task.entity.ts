@@ -10,7 +10,7 @@ export class Tasks extends BaseEntity {
     description: string;
 
     @Column({
-        default: true
+        default: false
     })
     completed: boolean;
 

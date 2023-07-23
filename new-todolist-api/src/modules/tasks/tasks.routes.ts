@@ -27,6 +27,10 @@ router.put('/update/:id',[
 router.delete('/delete/:id',[
     check(':id').custom(tasksExists),
     catchErrors
-], tasksController.delete);
+], tasksController.deleteOne);
+
+router.delete('/delete',[
+    
+], tasksController.deleteMultiple);
 
 export default router;

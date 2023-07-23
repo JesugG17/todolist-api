@@ -2,6 +2,7 @@ import { StatusCodes } from "http-status-codes";
 import { v4 as uuid } from 'uuid';
 import { Tasks } from "./entities/task.entity";
 import { UpdateTaskDto } from './dto/update-task.dto';
+import { In } from "typeorm";
 
 
 export class TasksService {
@@ -18,13 +19,13 @@ export class TasksService {
         }
     }
 
-    async create(description: string, userId: number) {
+    async create(description: string, completed: boolean, userId: number) {
         try {
 
             const task = new Tasks();
             task.description = description;
             task.taskId = uuid();
-            task.completed = true;
+            task.completed = completed;
             task.userId = userId;
             
             await task.save();
@@ -79,7 +80,7 @@ export class TasksService {
 
     }
 
-    async delete(taskId: string) {
+    async deleteOne(taskId: string) {
         try {
             
             await Tasks.delete({ taskId });
@@ -94,6 +95,28 @@ export class TasksService {
             return {
                 data: null,
                 message: 'An error has ocurred while deleting task...',
+                code: StatusCodes.INTERNAL_SERVER_ERROR
+            }
+        }
+    }
+
+    async deleteMultiple(tasks: string[]) {
+        try {
+            
+            const resp = await Tasks.delete({ taskId: In(tasks)});
+
+            console.log(resp);
+
+            return {
+                data: null,
+                message: `Deleted ${ resp.affected } tasks successfully`,
+                code: StatusCodes.OK
+            }
+
+        } catch (error) {
+            return {
+                data: null,
+                message: 'An error has ocurred while deleting tasks...',
                 code: StatusCodes.INTERNAL_SERVER_ERROR
             }
         }
