@@ -24,7 +24,7 @@ export class TasksService {
             const task = new Tasks();
             task.description = description;
             task.taskId = uuid();
-            task.status = true;
+            task.completed = true;
             task.userId = userId;
             
             await task.save();
@@ -58,7 +58,7 @@ export class TasksService {
             }
 
             task.description = updateTaskDto.description ?? task.description;
-            task.status = updateTaskDto.status ?? task.status
+            task.completed = updateTaskDto.completed ?? task.completed;
 
             await task.save();
 

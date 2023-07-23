@@ -8,6 +8,6 @@ export class UpdateTaskDto  {
 
     @IsOptional()
     @IsBoolean()
-    status?: boolean;
+    completed?: boolean;
 
 }

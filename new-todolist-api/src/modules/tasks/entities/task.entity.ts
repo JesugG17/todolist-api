@@ -1,4 +1,4 @@
-import { BaseEntity, Column, Entity, PrimaryColumn, Table } from "typeorm";
+import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
 
 @Entity()
 export class Tasks extends BaseEntity {
@@ -12,7 +12,7 @@ export class Tasks extends BaseEntity {
     @Column({
         default: true
     })
-    status: boolean;
+    completed: boolean;
 
     @Column()
     userId: number;
