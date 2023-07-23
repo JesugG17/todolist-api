@@ -16,7 +16,7 @@ export class AuthService  {
             
             if (!isValidPassword) {
                 return {
-                    messages: ['The password is incorrect'],
+                    message: 'The password is incorrect',
                     data: null,
                     code: StatusCodes.BAD_REQUEST
                 }
@@ -25,14 +25,21 @@ export class AuthService  {
             const token = await generateJWT(user.userid);
 
             return {
-                messages: ['Login succesfully'],
-                data: { user: user.userName, token },
+                message: 'Login succesfully',
+                data: { 
+                    user: {
+                        userName: user.userName,
+                        email: user.email,
+                        photo: null,
+                    }, 
+                    token 
+                },
                 code: StatusCodes.OK
             }
 
         } catch (error)  {
             return {
-                messages: ['A internal server error has ocurred'],
+                message: 'A internal server error has ocurred',
                 data: null,
                 code: StatusCodes.INTERNAL_SERVER_ERROR
             }
@@ -56,7 +63,7 @@ export class AuthService  {
             await newUser.save();
 
             return {
-                messages: ['User registered successfully!'],
+                message: 'User registered successfully!',
                 data: null,
                 code: StatusCodes.CREATED
             }
@@ -64,7 +71,7 @@ export class AuthService  {
         } catch (error) {
             console.log(error);
             return {
-                messages: ['A internal server error has ocurred'],
+                message: 'A internal server error has ocurred',
                 data: null,
                 code: StatusCodes.INTERNAL_SERVER_ERROR
             }
@@ -77,7 +84,7 @@ export class AuthService  {
         if (!data.ok) {
             return {
                 data:null,
-                messages: ['Google sign in failed'],
+                message: 'Google sign in failed',
                 code: StatusCodes.BAD_REQUEST
             }
         }
@@ -97,8 +104,15 @@ export class AuthService  {
         const token = await generateJWT(user.userid);
 
         return {
-            data: {user: user.userName, token},
-            message: ['Sign in successfully'],
+            data: {
+                user: {
+                    userName: user.userName,
+                    email: user.email,
+                    photo: data.picture
+                }, 
+                token
+            },
+            message: 'Sign in successfully',
             code: StatusCodes.OK
         }
         

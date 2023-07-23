@@ -30,7 +30,7 @@ export class TasksService {
             await task.save();
 
             return {
-                data: null,
+                data: task,
                 message: 'Task created successfully',
                 code: StatusCodes.CREATED
             }

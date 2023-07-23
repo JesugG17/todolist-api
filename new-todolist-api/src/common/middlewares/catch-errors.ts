@@ -13,7 +13,7 @@ export const catchErrors = (req: Request, res: Response, next: NextFunction) => 
     if (hasError) {
         return res.json({
             data: null,
-            messages: normalizedErrors,
+            message: normalizedErrors[0],
             code: StatusCodes.BAD_REQUEST,
         })
     }
