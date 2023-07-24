@@ -37,7 +37,6 @@ export class TasksService {
             }
 
         } catch (error) {
-            console.log(error);
             return {
                 data: null,
                 message: 'An error has ocurred while creating task...',
@@ -105,8 +104,6 @@ export class TasksService {
         try {
             
             const resp = await Tasks.delete({ taskId: In(tasks)});
-
-            console.log(resp);
 
             return {
                 data: null,

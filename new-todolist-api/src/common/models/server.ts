@@ -4,6 +4,7 @@ import { AppDataSource } from "../db/data-source";
 import { Paths } from "../types/paths.interface";
 import AuthRouter from "../../modules/auth/auth.routes";
 import TasksRouter from '../../modules/tasks/tasks.routes';
+import UploadRouter from '../../modules/upload/upload.routes';
 import bodyParser from "body-parser";
 
 export class Server {
@@ -17,6 +18,7 @@ export class Server {
     this.paths = {
       auth: "/api/auth",
       task: "/api/task",
+      upload: "/api/upload",
     };
 
     this.middlewares();
@@ -41,6 +43,7 @@ export class Server {
   private routes() {
     this.app.use(this.paths.auth, AuthRouter);
     this.app.use(this.paths.task, TasksRouter);
+    this.app.use(this.paths.upload, UploadRouter);
   }
 
   startServer() {
