@@ -25,4 +25,7 @@ export class Users extends BaseEntity {
     })
     google: boolean;
 
+    @Column({ nullable: true })
+    photoUrl: string;
+
 }

@@ -37,6 +37,7 @@ export class TasksService {
             }
 
         } catch (error) {
+            console.log(error);
             return {
                 data: null,
                 message: 'An error has ocurred while creating task...',
@@ -109,7 +110,7 @@ export class TasksService {
 
             return {
                 data: null,
-                message: `Deleted ${ resp.affected } tasks successfully`,
+                message: `${ resp.affected } tasks deleted successfully`,
                 code: StatusCodes.OK
             }
 

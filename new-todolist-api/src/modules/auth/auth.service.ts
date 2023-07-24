@@ -98,6 +98,7 @@ export class AuthService  {
             user.password = bcrypt.hashSync(':P', bcrypt.genSaltSync());
             user.google = true;
             user.status = true;
+            user.photoUrl = data.picture as string;
             user.save();
         }
 
@@ -108,7 +109,7 @@ export class AuthService  {
                 user: {
                     userName: user.userName,
                     email: user.email,
-                    photo: data.picture
+                    photo: user.photoUrl
                 }, 
                 token
             },
