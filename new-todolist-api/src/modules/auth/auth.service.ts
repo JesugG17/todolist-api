@@ -30,7 +30,7 @@ export class AuthService  {
                     user: {
                         userName: user.userName,
                         email: user.email,
-                        photo: null,
+                        photo: user.photoUrl,
                     }, 
                     token 
                 },

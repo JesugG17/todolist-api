@@ -15,6 +15,7 @@ declare global {
       SECRET_KEY: string;
       GOOGLE_ID: string;
       GOOGLE_SECRET: string;
+      CLOUDINARY_URL: string;
       // YOUR ENVIROMENT VARIALBES THAT YOU LIKE TO ADD
     }
 }

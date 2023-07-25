@@ -1,11 +1,13 @@
-import express, { Application, Request, Response } from "express";
+import express, { Application } from "express";
+import fileUpload from 'express-fileupload';
+import bodyParser from "body-parser";
 import cors from "cors";
+
 import { AppDataSource } from "../db/data-source";
 import { Paths } from "../types/paths.interface";
 import AuthRouter from "../../modules/auth/auth.routes";
 import TasksRouter from '../../modules/tasks/tasks.routes';
 import UploadRouter from '../../modules/upload/upload.routes';
-import bodyParser from "body-parser";
 
 export class Server {
   private app: Application;
@@ -38,6 +40,11 @@ export class Server {
     this.app.use(bodyParser.json());
     this.app.use(bodyParser.urlencoded({ extended: true }));
     this.app.use(express.static("public"));
+    this.app.use(fileUpload({
+      useTempFiles: true,
+      tempFileDir: '/tmp/',
+      createParentPath: true
+    }))
   }
 
   private routes() {
