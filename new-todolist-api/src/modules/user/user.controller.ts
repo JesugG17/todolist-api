@@ -16,7 +16,10 @@ export class UserController {
     }
 
     async delete(req: Request, res: Response) {
+        const userService = new UserService();
+        const userId = req.userId;
 
+        const response = await userService.delete(userId as number);
     }
 
 }

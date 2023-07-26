@@ -43,8 +43,35 @@ export class UserService {
         }
     }
 
-    async delete() {
+    async delete(userId: number) {
+        try {
+            
+            const user = await Users.findOneBy({ userId });
 
+            if (!user) {
+                return {
+                    data: null,
+                    message: 'This user do not exists',
+                    code: StatusCodes.BAD_REQUEST,
+                }
+            }
+
+            user.status = false;
+
+            await user.save();
+
+            return {
+                data: null,
+                message: 'Account deleted successfully',
+                code: StatusCodes.OK
+            }
+        } catch (error) {
+            return {
+                data: null,
+                message: 'An error has ocurred while deleting user',
+                code: StatusCodes.INTERNAL_SERVER_ERROR
+            }
+        }
     }
 
 }
