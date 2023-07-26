@@ -12,20 +12,27 @@ export class AuthService  {
 
             const user = await Users.findOneBy({ email }) as Users;
 
-            const isValidPassword = bcrypt.compareSync(password, user.password);
-            
-            if (!isValidPassword) {
+            if (!user.status) {
                 return {
-                    message: 'The password is incorrect',
                     data: null,
+                    message: 'This account do not exists',
                     code: StatusCodes.BAD_REQUEST
                 }
             }
 
-            const token = await generateJWT(user.userid);
+            const isValidPassword = bcrypt.compareSync(password, user.password);
+            
+            if (!isValidPassword) {
+                return {
+                    data: null,
+                    message: 'The password is incorrect',
+                    code: StatusCodes.BAD_REQUEST
+                }
+            }
+
+            const token = await generateJWT(user.userId);
 
             return {
-                message: 'Login succesfully',
                 data: { 
                     user: {
                         userName: user.userName,
@@ -34,13 +41,14 @@ export class AuthService  {
                     }, 
                     token 
                 },
+                message: 'Login succesfully',
                 code: StatusCodes.OK
             }
 
         } catch (error)  {
             return {
-                message: 'A internal server error has ocurred',
                 data: null,
+                message: 'A internal server error has ocurred',
                 code: StatusCodes.INTERNAL_SERVER_ERROR
             }
         }
@@ -51,14 +59,22 @@ export class AuthService  {
 
             const { userName, email, password } = createUserDto;
 
-            const newUser = new Users();
+            let newUser = await Users.findOneBy({  email });
 
-            const salt = await bcrypt.genSalt();
-            newUser.userName = userName;
-            newUser.email = email;
-            newUser.password = bcrypt.hashSync(password, salt);
-            newUser.status = true;
-            newUser.google = false;
+            if (!newUser) {
+                newUser = new Users();
+                const salt = await bcrypt.genSalt();
+                newUser.userName = userName;
+                newUser.email = email;
+                newUser.password = bcrypt.hashSync(password, salt);
+                newUser.status = true;
+                newUser.google = false;
+            }
+
+
+            if (!newUser.status) {
+                newUser.status = true;
+            }
 
             await newUser.save();
 
@@ -102,7 +118,7 @@ export class AuthService  {
             user.save();
         }
 
-        const token = await generateJWT(user.userid);
+        const token = await generateJWT(user.userId);
 
         return {
             data: {

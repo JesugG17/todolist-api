@@ -4,7 +4,6 @@ import { Tasks } from "./entities/task.entity";
 import { UpdateTaskDto } from './dto/update-task.dto';
 import { In } from "typeorm";
 
-
 export class TasksService {
     
     async getAll(userId: number) {

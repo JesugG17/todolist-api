@@ -4,7 +4,6 @@ import { UserService } from "./user.service";
 
 export class UserController {
 
-
     async update(req: Request, res: Response) {
         const userService = new UserService();
         const updateUserDto = req.body as UpdateUserDto;
@@ -20,6 +19,8 @@ export class UserController {
         const userId = req.userId;
 
         const response = await userService.delete(userId as number);
+
+        res.status(response.code).json(response);
     }
 
 }
