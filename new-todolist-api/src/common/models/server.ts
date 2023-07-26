@@ -5,10 +5,11 @@ import cors from "cors";
 
 import { AppDataSource } from "../db/data-source";
 import { Paths } from "../types/paths.interface";
+
 import AuthRouter from "../../modules/auth/auth.routes";
 import TasksRouter from '../../modules/tasks/tasks.routes';
 import UploadRouter from '../../modules/upload/upload.routes';
-
+import UserRouter from '../../modules/user/user.routes';
 export class Server {
   private app: Application;
   private port: number;
@@ -21,6 +22,7 @@ export class Server {
       auth: "/api/auth",
       task: "/api/task",
       upload: "/api/upload",
+      user: '/api/user',
     };
 
     this.middlewares();
@@ -51,6 +53,7 @@ export class Server {
     this.app.use(this.paths.auth, AuthRouter);
     this.app.use(this.paths.task, TasksRouter);
     this.app.use(this.paths.upload, UploadRouter);
+    this.app.use(this.paths.user, UserRouter);
   }
 
   startServer() {
