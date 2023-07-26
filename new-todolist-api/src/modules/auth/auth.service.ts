@@ -1,6 +1,6 @@
 import bcrypt from 'bcrypt';
 import { StatusCodes } from 'http-status-codes';
-import { CreateUserDto } from './dto/create-user-dto';
+import { CreateUserDto } from './dto/create-user.dto';
 import { Users } from './entities';
 import { generateJWT } from '../../common/utils/generateJWT';
 import { googleVerify } from '../../common/utils/googleVerify';

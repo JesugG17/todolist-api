@@ -1,9 +1,12 @@
 import { Router } from 'express';
+import { UserController } from './user.controller';
 
 const router = Router();
 
-router.put('/update');
+const userController = new UserController();
 
-router.delete('/delete');
+router.put('/update', userController.update);
+
+router.delete('/delete', userController.delete);
 
 export default router;
