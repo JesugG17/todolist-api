@@ -7,7 +7,7 @@ export const emailExists = async(email: string) => {
 
     const user = await Users.findOneBy({ email });
 
-    if (user) {
+    if (user && user.status) {
         throw new Error('This email is already taken');
     }
 }
