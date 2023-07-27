@@ -16,10 +16,9 @@ export class UploadController {
             });
         }
         
-        const user = await Users.findOneBy({ userId: req.userId });
         const file = req.files.photo as UploadedFile;
 
-        const response = await uploadService.uploadPhoto(file, user as Users);
+        const response = await uploadService.uploadPhoto(file, req.userId as number);
 
         res.status(response.code).json(response);
     }

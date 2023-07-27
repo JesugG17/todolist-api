@@ -7,7 +7,7 @@ export class UserService {
 
     async update(updateUserDto: UpdateUserDto, userId: number) {
         try {
-            const user = await Users.findOneBy({ userId });
+            const user = await Users.findOneBy({ userid: userId });
 
             if (!user) {
                 return {
@@ -17,7 +17,7 @@ export class UserService {
                 }
             }
 
-            user.userName = updateUserDto.userName;
+            user.username = updateUserDto.userName;
             
             if (updateUserDto.password) {
                 const hashedPassword = bcrypt.hashSync(updateUserDto.password as string, bcrypt.genSaltSync());
@@ -28,7 +28,7 @@ export class UserService {
 
             return {
                 data: {
-                    userName: user.userName
+                    userName: user.username
                 },
                 message: 'User updated successfully!',
                 code: StatusCodes.OK
@@ -46,7 +46,7 @@ export class UserService {
     async delete(userId: number) {
         try {
             
-            const user = await Users.findOneBy({ userId });
+            const user = await Users.findOneBy({ userid: userId });
 
             if (!user) {
                 return {

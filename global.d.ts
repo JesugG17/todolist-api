@@ -9,6 +9,7 @@ declare global {
   }
   namespace NodeJS {
     interface ProcessEnv {
+      HOST: string;
       DB_USERNAME: string;
       DB_PASSWORD: string;
       DB_NAME: string;

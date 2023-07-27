@@ -8,7 +8,7 @@ export class TasksService {
     
     async getAll(userId: number) {
         const tasks = await Tasks.find({
-            where: { userId }
+            where: { userid: userId }
         });
 
         return {
@@ -23,9 +23,9 @@ export class TasksService {
 
             const task = new Tasks();
             task.description = description;
-            task.taskId = uuid();
+            task.taskid = uuid();
             task.completed = completed;
-            task.userId = userId;
+            task.userid = userId;
             
             await task.save();
 
@@ -44,15 +44,15 @@ export class TasksService {
         }
     }
 
-    async update(updateTaskDto: UpdateTaskDto, taskId: string) {
+    async update(updateTaskDto: UpdateTaskDto, taskid: string) {
         try {
             
-            const task = await Tasks.findOneBy({ taskId });
+            const task = await Tasks.findOneBy({ taskid });
 
             if (!task) {
                 return {
                     data: null,
-                    message: `The task with id ${ taskId } do not exists`,
+                    message: `The task with id ${ taskid } do not exists`,
                     code: StatusCodes.BAD_REQUEST
                 }
             }
@@ -79,10 +79,10 @@ export class TasksService {
 
     }
 
-    async deleteOne(taskId: string) {
+    async deleteOne(taskid: string) {
         try {
             
-            await Tasks.delete({ taskId });
+            await Tasks.delete({ taskid });
 
             return {
                 data: null,
@@ -102,7 +102,7 @@ export class TasksService {
     async deleteMultiple(tasks: string[]) {
         try {
             
-            const resp = await Tasks.delete({ taskId: In(tasks)});
+            const resp = await Tasks.delete({ taskid: In(tasks)});
 
             return {
                 data: null,

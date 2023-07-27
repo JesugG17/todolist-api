@@ -4,7 +4,7 @@ import { BaseEntity, Column, Entity, PrimaryColumn } from "typeorm";
 export class Tasks extends BaseEntity {
 
     @PrimaryColumn()
-    taskId: string;
+    taskid: string;
 
     @Column()
     description: string;
@@ -15,6 +15,6 @@ export class Tasks extends BaseEntity {
     completed: boolean;
 
     @Column()
-    userId: number;
+    userid: number;
      
 }

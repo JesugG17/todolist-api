@@ -4,10 +4,10 @@ import { Entity, BaseEntity, PrimaryGeneratedColumn, Column } from 'typeorm';
 export class Users extends BaseEntity {
 
     @PrimaryGeneratedColumn()
-    userId: number;
+    userid: number;
 
     @Column()
-    userName: string;
+    username: string;
 
     @Column()
     email: string;
@@ -26,6 +26,6 @@ export class Users extends BaseEntity {
     google: boolean;
 
     @Column({ nullable: true })
-    photoUrl: string;
+    photourl: string;
 
 }

@@ -10,10 +10,20 @@ import { StatusCodes } from "http-status-codes";
 cloudinary.config(config.CLOUDINARY_URL);
 export class UploadService {
 
-    async uploadPhoto(photo: UploadedFile, user: Users) {
+    async uploadPhoto(photo: UploadedFile, userid: number) {
 
         try {
             
+            const user = await Users.findOneBy({ userid });
+
+            if (!user) {
+                return {
+                    data: null,
+                    message: 'This user do not exists',
+                    code: StatusCodes.BAD_REQUEST
+                }
+            }
+
             const { name } = photo;
     
             const [, extension] = name.split('.');
@@ -30,20 +40,20 @@ export class UploadService {
                 }
             });
     
-            if (user.photoUrl) {
-                const nameArray = user.photoUrl.split('/');
+            if (user.photourl) {
+                const nameArray = user.photourl.split('/');
                 const name = nameArray[nameArray.length - 1];
                 const [photoId] = name.split('.');
                 await cloudinary.uploader.destroy(photoId);
             }
     
             const { secure_url} = await cloudinary.uploader.upload(uploadPath);
-            user.photoUrl = secure_url;
+            user.photourl = secure_url;
             
             await user.save();
     
             return {
-                data: user.photoUrl,
+                data: user.photourl,
                 message: 'Profile photo updated successfully!',
                 code: StatusCodes.OK,
             }

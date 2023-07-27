@@ -30,14 +30,14 @@ export class AuthService  {
                 }
             }
 
-            const token = await generateJWT(user.userId);
+            const token = await generateJWT(user.userid);
 
             return {
                 data: { 
                     user: {
-                        userName: user.userName,
+                        userName: user.username,
                         email: user.email,
-                        photo: user.photoUrl,
+                        photo: user.photourl,
                     }, 
                     token 
                 },
@@ -64,7 +64,7 @@ export class AuthService  {
             if (!newUser) {
                 newUser = new Users();
                 const salt = await bcrypt.genSalt();
-                newUser.userName = userName;
+                newUser.username = userName;
                 newUser.email = email;
                 newUser.password = bcrypt.hashSync(password, salt);
                 newUser.status = true;
@@ -110,22 +110,22 @@ export class AuthService  {
         if (!user) {
             user = new Users();
             user.email = data.email as string;
-            user.userName = data.name as string;
+            user.username = data.name as string;
             user.password = bcrypt.hashSync(':P', bcrypt.genSaltSync());
             user.google = true;
             user.status = true;
-            user.photoUrl = data.picture as string;
+            user.photourl = data.picture as string;
             user.save();
         }
 
-        const token = await generateJWT(user.userId);
+        const token = await generateJWT(user.userid);
 
         return {
             data: {
                 user: {
-                    userName: user.userName,
+                    userName: user.username,
                     email: user.email,
-                    photo: user.photoUrl
+                    photo: user.photourl
                 }, 
                 token
             },
