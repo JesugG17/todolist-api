@@ -23,8 +23,8 @@ export const emailNotExists = async(email: string) => {
 }
 
 export const tasksExists = async(taskId: string) => {
-    const task = await Tasks.findOneBy({ taskId });
-    console.log(task);
+    const task = await Tasks.findOneBy({ taskid: taskId });
+
     if (!task) {
         throw new Error(`The task with id ${ taskId } do not exists`)
     }
