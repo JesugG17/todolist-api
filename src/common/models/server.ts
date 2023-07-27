@@ -6,6 +6,8 @@ import cors from "cors";
 import { AppDataSource } from "../db/data-source";
 import { Paths } from "../types/paths.interface";
 
+import config from '../../../config';
+
 import AuthRouter from "../../modules/auth/auth.routes";
 import TasksRouter from '../../modules/tasks/tasks.routes';
 import UploadRouter from '../../modules/upload/upload.routes';
@@ -17,7 +19,7 @@ export class Server {
 
   constructor() {
     this.app = express();
-    this.port = 8080;
+    this.port = +config.SERVER_PORT;
     this.paths = {
       auth: "/api/auth",
       task: "/api/task",
