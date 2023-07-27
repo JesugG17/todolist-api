@@ -9,7 +9,7 @@ dotenv.config({ path: path.resolve(__dirname, "../.env") });
 // as someone could skip these varibales or not setup a .env file at all
 
 interface ENV {
-  SERVER_PORT: string;
+  PORT: string;
   HOST: string;
   DB_USERNAME: string;
   DB_PASSWORD: string;
@@ -23,7 +23,7 @@ interface ENV {
 }
 
 interface Config {
-  SERVER_PORT: string;
+  PORT: string;
   HOST: string;
   DB_USERNAME: string;
   DB_PASSWORD: string;
@@ -40,7 +40,7 @@ interface Config {
 
 const getConfig = (): ENV => {
   return {
-    SERVER_PORT: process.env.SERVER_PORT,
+    PORT: process.env.PORT,
     HOST: process.env.HOST,
     DB_NAME: process.env.DB_NAME,
     DB_PASSWORD: process.env.DB_PASSWORD,

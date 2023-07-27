@@ -19,7 +19,7 @@ export class Server {
 
   constructor() {
     this.app = express();
-    this.port = +config.SERVER_PORT;
+    this.port = +config.PORT;
     this.paths = {
       auth: "/api/auth",
       task: "/api/task",
@@ -59,7 +59,7 @@ export class Server {
   }
 
   startServer() {
-    this.app.listen(this.port, () => {
+    this.app.listen(this.port, '0.0.0.0' ,() => {
       console.log(`application running at ${this.port} port`);
     });
   }
