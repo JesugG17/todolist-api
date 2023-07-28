@@ -1,4 +1,4 @@
-import express, { Application } from "express";
+import express, { Application, Request, Response } from "express";
 import fileUpload from 'express-fileupload';
 import bodyParser from "body-parser";
 import cors from "cors";
@@ -12,6 +12,7 @@ import AuthRouter from "../../modules/auth/auth.routes";
 import TasksRouter from '../../modules/tasks/tasks.routes';
 import UploadRouter from '../../modules/upload/upload.routes';
 import UserRouter from '../../modules/user/user.routes';
+import path from "path";
 export class Server {
   private app: Application;
   private port: number;
@@ -56,6 +57,11 @@ export class Server {
     this.app.use(this.paths.task, TasksRouter);
     this.app.use(this.paths.upload, UploadRouter);
     this.app.use(this.paths.user, UserRouter);
+    
+    // Wildcard
+    this.app.get('*', (req: Request, res: Response) => {
+      res.sendFile(__dirname + '../../../public/index.html');
+    });
   }
 
   startServer() {
