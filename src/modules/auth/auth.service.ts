@@ -24,6 +24,7 @@ export class AuthService  {
             const isValidPassword = bcrypt.compareSync(password, user.password);
             
             if (!isValidPassword) {
+                console.log('here');
                 return {
                     data: null,
                     message: 'The password is incorrect',
@@ -42,7 +43,7 @@ export class AuthService  {
                     }, 
                     token 
                 },
-                message: 'Login succesfully',
+                message: 'Sign in succesfully',
                 code: StatusCodes.OK
             }
 

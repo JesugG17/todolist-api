@@ -17,7 +17,7 @@ export const emailNotExists = async(email: string) => {
     const user = await Users.findOneBy({ email });
 
     if (!user) {
-        throw new Error('this emails do not exists');
+        throw new Error('This emails do not exists');
     }
 
 }
