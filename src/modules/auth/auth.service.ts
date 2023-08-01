@@ -19,6 +19,14 @@ export class AuthService {
         };
       }
 
+      if (user.google) {
+        return {
+          data: null,
+          message: 'This user is google user',
+          code: StatusCodes.UNAUTHORIZED
+        }
+      }
+      
       const isValidPassword = bcrypt.compareSync(password, user.password);
 
       if (!isValidPassword) {
