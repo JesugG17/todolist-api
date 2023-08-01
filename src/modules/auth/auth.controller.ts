@@ -11,7 +11,7 @@ export class AuthController {
 
         const response = await authService.logIn(email, password);
 
-        res.json(response);
+        res.status(response.code).json(response);
     }
 
     async register(req: Request, res: Response) {
@@ -20,7 +20,7 @@ export class AuthController {
         
         const response = await authService.register(user);
         
-        res.json(response);
+        res.status(response.code).json(response);
     }
 
     async googleSignIn(req: Request, res: Response) {
@@ -28,6 +28,15 @@ export class AuthController {
         const { code } = req.body;
 
         const response = await authService.googleSignIn(code);
+
+        res.status(response.code).json(response);
+    }
+
+    async resetPassword(req: Request, res: Response) {
+        const authService = new AuthService();
+        const email = req.body.email as string;
+
+        const response = await authService.resetPassword(email);
 
         res.json(response);
     }

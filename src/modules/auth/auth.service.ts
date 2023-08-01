@@ -4,6 +4,7 @@ import { CreateUserDto } from './dto/create-user.dto';
 import { Users } from './entities';
 import { generateJWT } from '../../common/utils/generateJWT';
 import { googleVerify } from '../../common/utils/googleVerify';
+import { sendEmailToResetPassword } from '../../common/utils/sendEmail';
 
 export class AuthService  {
 
@@ -133,6 +134,30 @@ export class AuthService  {
             code: StatusCodes.OK
         }
         
+    }
+
+    async resetPassword(email: string) {
+        try {
+
+            const user = await Users.findOneBy({ email });
+
+            if (!user) {
+                return {
+                    data: null,
+                    message: 'This email do not exists',
+                    code: StatusCodes.BAD_REQUEST
+                }
+            }
+
+            await sendEmailToResetPassword(user);
+            
+        } catch (error) {
+            return {
+                data: null,
+                message: 'An error has ocurred while sending email...',
+                code: StatusCodes.INTERNAL_SERVER_ERROR
+            }
+        }
     }
 
 }

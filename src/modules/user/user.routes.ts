@@ -14,9 +14,4 @@ router.delete('/delete',[
     validateJWT
 ], userController.delete);
 
-// TEST ROUTE
-router.post('/email', [
-    validateJWT
-], userController.sendEmail);
-
 export default router;

@@ -74,8 +74,4 @@ export class UserService {
         }
     }
 
-    async sendEmail(userid: number) {
-        
-    }
-
 }
