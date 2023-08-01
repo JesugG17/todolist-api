@@ -43,6 +43,47 @@ export class UserService {
         }
     }
 
+    async resetPassword(email: string, newPasword: string) {
+        try {
+            
+            const user = await Users.findOneBy({ email });
+
+            if (!user) {
+                return {
+                    data: null,
+                    message: `The user with the email ${email} do not exists`,
+                    code: StatusCodes.BAD_REQUEST
+                };
+            }
+
+            if (!user.isupdatingpass) {
+                return {
+                    data: null,
+                    message: 'This user does not updating his pass',
+                    code: StatusCodes.UNAUTHORIZED
+                }
+            }
+
+            user.password = newPasword;
+            user.isupdatingpass = false;
+            
+            await user.save();
+
+            return {
+                data: null,
+                message: 'Password restored successfully',
+                code: StatusCodes.OK
+            }
+        
+        } catch (error) {
+            return {
+                data: null,
+                message: 'An error has ocurred while reseting password',
+                code: StatusCodes.INTERNAL_SERVER_ERROR
+            }
+        }
+    }
+
     async delete(userId: number) {
         try {
             

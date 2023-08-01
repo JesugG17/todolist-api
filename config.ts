@@ -20,6 +20,7 @@ interface ENV {
   CLOUDINARY_URL: string;
   EMAIL: string;
   PASSWORD: string;
+  NODE_ENV: 'DEVELOPMENT' | 'PRODUCTION';
   // SECRETKEY: string | undefined;
   // your enviroment variables declared like the commented line above
 }
@@ -36,6 +37,7 @@ interface Config {
   CLOUDINARY_URL: string;
   EMAIL: string;
   PASSWORD: string;
+  NODE_ENV: 'DEVELOPMENT' | 'PRODUCTION';
   // SECRETKEY: string;
   // Again your enviroments variables declared like the commented line above
 }
@@ -55,7 +57,7 @@ const getConfig = (): ENV => {
     CLOUDINARY_URL: process.env.CLOUDINARY_URL,
     EMAIL: process.env.EMAIL,
     PASSWORD: process.env.PASSWORD,
-  
+    NODE_ENV: process.env.NODE_ENV
   };
 };
 

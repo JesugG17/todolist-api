@@ -14,4 +14,6 @@ router.delete('/delete',[
     validateJWT
 ], userController.delete);
 
+router.put('/reset-password', userController.resetPassword);
+
 export default router;

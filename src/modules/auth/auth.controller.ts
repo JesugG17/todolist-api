@@ -3,7 +3,6 @@ import { AuthService } from './auth.service';
 import { CreateUserDto } from './dto/create-user.dto';
 
 export class AuthController {
-
     
     async logIn(req: Request, res: Response) {
         const authService = new AuthService()
@@ -32,11 +31,11 @@ export class AuthController {
         res.status(response.code).json(response);
     }
 
-    async resetPassword(req: Request, res: Response) {
+    async sendResetPassword(req: Request, res: Response) {
         const authService = new AuthService();
-        const email = req.body.email as string;
+        const { email, newPassword } = req.body;
 
-        const response = await authService.resetPassword(email);
+        const response = await authService.sendResetPassword(email, newPassword);
 
         res.json(response);
     }

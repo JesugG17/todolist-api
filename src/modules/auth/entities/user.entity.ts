@@ -28,4 +28,8 @@ export class Users extends BaseEntity {
     @Column({ nullable: true })
     photourl: string;
 
+    @Column({ nullable: true })
+    isupdatingpass: boolean;
+    
+
 }

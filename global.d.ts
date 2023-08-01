@@ -20,6 +20,7 @@ declare global {
       CLOUDINARY_URL: string;
       EMAIL: string;
       PASSWORD: string;
+      NODE_ENV: 'DEVELOPMENT' | 'PRODUCTION';
       // YOUR ENVIROMENT VARIALBES THAT YOU LIKE TO ADD
     }
 }
