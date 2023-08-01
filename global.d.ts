@@ -18,6 +18,8 @@ declare global {
       GOOGLE_ID: string;
       GOOGLE_SECRET: string;
       CLOUDINARY_URL: string;
+      EMAIL: string;
+      PASSWORD: string;
       // YOUR ENVIROMENT VARIALBES THAT YOU LIKE TO ADD
     }
 }
