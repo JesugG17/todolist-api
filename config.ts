@@ -21,6 +21,7 @@ interface ENV {
   SENDER_EMAIL: string;
   SENDER_CLIENT_ID: string;
   SENDER_CLIENT_SECRET: string;
+  SENDER_ACCESS_TOKEN: string;
   SENDER_REFRESH_TOKEN: string;
   NODE_ENV: 'DEVELOPMENT' | 'PRODUCTION';
   // SECRETKEY: string | undefined;
@@ -40,6 +41,7 @@ interface Config {
   SENDER_EMAIL: string;
   SENDER_CLIENT_ID: string;
   SENDER_CLIENT_SECRET: string;
+  SENDER_ACCESS_TOKEN: string;
   SENDER_REFRESH_TOKEN: string;
   NODE_ENV: 'DEVELOPMENT' | 'PRODUCTION';
   // SECRETKEY: string;
@@ -62,6 +64,7 @@ const getConfig = (): ENV => {
     SENDER_EMAIL: process.env.SENDER_EMAIL,
     SENDER_CLIENT_ID: process.env.SENDER_CLIENT_ID,
     SENDER_CLIENT_SECRET: process.env.SENDER_CLIENT_SECRET,
+    SENDER_ACCESS_TOKEN: process.env.SENDER_ACCESS_TOKEN,
     SENDER_REFRESH_TOKEN: process.env.SENDER_REFRESH_TOKEN,
     NODE_ENV: process.env.NODE_ENV
   };

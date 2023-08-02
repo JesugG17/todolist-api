@@ -21,6 +21,7 @@ declare global {
       SENDER_EMAIL: string;
       SENDER_CLIENT_ID: string;
       SENDER_CLIENT_SECRET: string;
+      SENDER_ACCESS_TOKEN: string;
       SENDER_REFRESH_TOKEN: string;
       NODE_ENV: 'DEVELOPMENT' | 'PRODUCTION';
       // YOUR ENVIROMENT VARIALBES THAT YOU LIKE TO ADD
