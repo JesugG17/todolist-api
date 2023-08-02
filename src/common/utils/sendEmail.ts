@@ -11,6 +11,7 @@ const transporter = nodemailer.createTransport({
     user: config.SENDER_EMAIL,
     clientId: config.SENDER_CLIENT_ID,
     clientSecret: config.SENDER_CLIENT_SECRET,
+    accessToken: config.SENDER_ACCESS_TOKEN,
     refreshToken: config.SENDER_REFRESH_TOKEN,
     expires: 3600
   },
