@@ -166,6 +166,7 @@ export class AuthService {
       };
 
     } catch (error) {
+      console.log(error);
       return {
         data: null,
         message: "An error has ocurred while sending email...",
