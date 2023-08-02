@@ -18,8 +18,10 @@ declare global {
       GOOGLE_ID: string;
       GOOGLE_SECRET: string;
       CLOUDINARY_URL: string;
-      EMAIL: string;
-      PASSWORD: string;
+      SENDER_EMAIL: string;
+      SENDER_CLIENT_ID: string;
+      SENDER_CLIENT_SECRET: string;
+      SENDER_REFRESH_TOKEN: string;
       NODE_ENV: 'DEVELOPMENT' | 'PRODUCTION';
       // YOUR ENVIROMENT VARIALBES THAT YOU LIKE TO ADD
     }

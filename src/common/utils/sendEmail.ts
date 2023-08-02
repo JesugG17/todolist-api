@@ -7,8 +7,12 @@ const transporter = nodemailer.createTransport({
   port: 465,
   secure: true,
   auth: {
-    user: config.EMAIL,
-    pass: config.PASSWORD,
+    type: 'OAuth2',
+    user: config.SENDER_EMAIL,
+    clientId: config.SENDER_CLIENT_ID,
+    clientSecret: config.SENDER_CLIENT_SECRET,
+    refreshToken: config.SENDER_REFRESH_TOKEN,
+    expires: 3600
   },
 });
 
@@ -18,7 +22,7 @@ const href = (process.env.NODE_ENV === 'DEVELOPMENT')
 
 export const sendEmailToResetPassword = async (user: Users, newPassword: string) => {
   await transporter.sendMail({
-    from: `${config.EMAIL} taskMailer`,
+    from: `${config.SENDER_EMAIL} taskMailer`,
     to: user.email,
     subject: "Recovery password",
     html: `
