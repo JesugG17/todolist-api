@@ -20,17 +20,20 @@ router.post('/create',[
 ], tasksController.create);
 
 router.put('/update/:id',[
+    validateJWT,
     check(':id').custom(tasksExists),
     catchErrors
 ], tasksController.update);
 
 router.delete('/delete/:id',[
+    validateJWT,
     check(':id').custom(tasksExists),
     catchErrors
 ], tasksController.deleteOne);
 
 router.delete('/delete',[
-    
+    validateJWT,
+    catchErrors
 ], tasksController.deleteMultiple);
 
 export default router;

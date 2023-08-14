@@ -138,6 +138,41 @@ export class AuthService {
     };
   }
 
+  async extendSession(email: string) {
+    try {
+      
+      const user = await Users.findOneBy({ email });
+
+      if (!user) {
+        return {
+          data: null,
+          message: `The user with ${email} email do not exists`,
+          code: StatusCodes.BAD_REQUEST
+        }
+      }
+
+      const { userid } = user;
+
+      const newToken = await generateJWT(userid);
+
+      return {
+        data: {
+          user: null,
+          token: newToken
+        },
+        message: 'Session extended successfully!',
+        code: StatusCodes.OK
+      }
+
+    } catch (error) {
+      return {
+        data: null,
+        message: 'An error has ocurred when trying extend session...',
+        code: StatusCodes.INTERNAL_SERVER_ERROR
+      } 
+    }
+  }
+
   async sendResetPassword(email: string, newPassword: string) {
     try {
       const user = await Users.findOneBy({ email });

@@ -6,7 +6,7 @@ export const generateJWT = ( userId: number ) => {
     return new Promise((resolve, reject) => {
 
         jwt.sign({ userId }, config.SECRET_KEY, { 
-            expiresIn: '4h'
+            expiresIn: '1h'
         }, (error, token) => {
 
             if (error) {

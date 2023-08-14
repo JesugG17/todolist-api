@@ -25,6 +25,11 @@ router.post('/register',[
 
 router.post('/google', authController.googleSignIn);
 
+router.post('/extend-session',[
+    check('email', 'The email can´t be empty').not().isEmpty(),
+    catchErrors
+], authController.extendSession);
+
 router.post('/reset-password', authController.sendResetPassword);
 
 export default router;

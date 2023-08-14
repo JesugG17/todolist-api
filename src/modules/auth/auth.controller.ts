@@ -31,6 +31,15 @@ export class AuthController {
         res.status(response.code).json(response);
     }
 
+    async extendSession(req: Request, res: Response) {
+        const authService = new AuthService();
+        const { email } = req.body;
+
+        const response = await authService.extendSession(email);
+
+        res.status(response.code).json(response)
+    }
+
     async sendResetPassword(req: Request, res: Response) {
         const authService = new AuthService();
         const { email, newPassword } = req.body;
